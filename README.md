@@ -1,7 +1,7 @@
 # Project Name by Dark Lord Chuckles The Silly Pig
 
 ## Roles
-* Thomas Zhang - Role
+* Thomas Zhang - Project Manager
 * Lauren Lee - Role
 * Diana Akhmedova - Role
 
