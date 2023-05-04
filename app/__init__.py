@@ -8,6 +8,11 @@ def hello_world():
     print(__name__)
     return "No hablo queso!"
 
+
 if __name__ == "__main__":  # true if this file NOT imported
     app.debug = True        # enable auto-reload upon code change
     app.run()
+
+#  <p>Use the arrow keys to navigate through the maze!</p>                                                                         <canvas id="maze"></canvas>                                                                                             <script src="maze.js"></script>                                                                                 </div>                                                                                                             
+#  <script type="text/javascript" src="{{ url_for('static', filename='js/maze.js') }}"></script> 
+#  <script src="maze.js"></script>
