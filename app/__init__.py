@@ -4,8 +4,9 @@ app = Flask(__name__)
 
 @app.route("/")       
 def auth():
-    # print("the __name__ of this module is... ")
-    # print(__name__)
+#   if 'username' in session
+
+
     return render_template('auth.html')
 
 # @app.route("/login")
@@ -16,24 +17,11 @@ def auth():
 
 # @app.route("/register")
 # def register():
-    
+
 
 # @app.route("/verifylogin", methods = ['GET', 'POST'])
 # def login():
-#     if (table_handler.user_check(request.form["username"]) == True):
-#         if (table_handler.password_check(request.form["username"], request.form["password"]) == True):
-#             session['username'] = request.form['username']
-#             return redirect('/')
-#         else:
-#             flash("Invalid username/password", "danger")
-#             return render_template('login.html')
-#     else: 
-#         flash("Please enter your username/password", "danger")
-#         return render_template('login.html')
-
-# @app.route("/registrate", methods = ['GET', 'POST'])
-# def registration():
-#     if (table_handler.registrate(request.form["createusername"], request.form["createpassword"]) == False):
+#     if (table_handlerpinegistrate(request.form["createusername"], request.form["createpassword"]) == False):
 #         flash("That username is already taken", "danger")
 #         return render_template('register.html')
 #     else:
