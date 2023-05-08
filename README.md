@@ -12,7 +12,22 @@
 * Placeholder
 
 ## Launch Codes
-### How To Clone/Install:
-* Placeholder
-### How To Run:
-* Placeholder
+```
+python -m venv pig
+source pig/bin/activate
+```
+
+2. Install packages
+```
+pip install -r requirements.txt
+```
+
+3. cd into app directory
+```
+cd app
+```
+4. Start Flask server 
+```
+python __init__.py
+```
+5. Go to ```http://127.0.0.1:5000/``` in browser
