@@ -53,7 +53,13 @@ thomasZ, laurenL, dianaA -- 2023-05-04 13:18
 * Set up Flask app, set up HTML page with linked JS.
 ==============================================================
 
-thomasZ - 2023-05-04 13:18
+thomasZ - 2023-05-08 13:18
 --------------------------------------------------------------
-set up routes needed for logging in and registering
+* set up routes needed for logging in and registering
 started working on html for login, register, landing
+==============================================================
+
+thomasZ - 2023-05-08 22:30
+--------------------------------------------------------------
+updated README in accordance with instructions
+==============================================================S
