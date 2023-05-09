@@ -8,86 +8,122 @@
       <link href="../static/css/style.css" rel="stylesheet">     
   </head>
 
-  <body> 
-    <div>
-      <label>Height
-        <input type="number" value="{{height}}" placeholder="begin typing..." name="height">
-      </label>
-      <p class="help-text" id="helptextheight">Your height <b>in inches!</b></p>
-    </div>
-    
-    <div>
-      <label>Weight
-        <input type="number" value="{{weight}}" placeholder="begin typing..." name="weight">
-      </label>
-      <p class="help-text" id="helptextweight">Your weight <b>in inches!</b></p>
-    </div>
-
-    <div>
-      <label>Age
-        <input type="number" value="{{age}}" placeholder="begin typing..." name="age">
-      </label>
-      <p class="help-text" id="helptextage">Your age <b>in years!</b></p>
-    </div>
-
-    <div>
-      <label>How healthy do you feel?
-        <input type="range" min="1" max="10" value="5" name="age" oninput="this.nextElementSibling.value = this.value">
-        <output>5</output>
-      </label>
-    </div>
-    
-    <div>
-        <label>Have you ever had a stroke?
-          <input type="radio" name="stroke" value="yes">Yes
-          <input type="radio" name="stroke" value="no">No 
-          <!-- want to ask how mamy times if press yes-->
+  <body>
+    <form action="">
+      <div>
+        <label>Height
+          <input type="number" value="{{height}}" placeholder="begin typing..." name="height">
         </label>
-    </div>
+        <p class="help-text" id="helptextheight">Your height <b>in inches!</b></p>
+      </div>
+      
+      <div>
+        <label>Weight
+          <input type="number" value="{{weight}}" placeholder="begin typing..." name="weight">
+        </label>
+        <p class="help-text" id="helptextweight">Your weight <b>in inches!</b></p>
+      </div>
 
-    <div>
-      <label>Do you have type two diabetes?
-        <input type="radio" name="stroke" value="yes">Yes
-        <input type="radio" name="stroke" value="no">No 
-      </label>
-    </div>
+      <div>
+        <label>Sex
+          <input type="radio" name="sex" value="female">Female
+          <input type="radio" name="sex" value="male">Male 
+        </label>
+      </div>
 
-    <div>
-      <label>Do you have type one diabetes?
-        <input type="radio" name="stroke" value="yes">Yes
-        <input type="radio" name="stroke" value="no">No 
-      </label>
-    </div>
+      <div>
+        <label>Age
+          <input type="number" value="{{age}}" placeholder="begin typing..." name="age">
+        </label>
+        <p class="help-text" id="helptextage">Your age <b>in years!</b></p>
+      </div>
 
-    <div>
-      <label>How often do you use alcohol in a week?
-        <input type="number" value="{{alcohol}}" placeholder="begin typing..." name="alcohol">
-      </label>
-    </div>
+      <div>
+        <label>How healthy do you eat?
+          <input type="range" min="1" max="10" value="5" name="eathealthy" oninput="this.nextElementSibling.value = this.value">
+          <output>5</output>
+        </label>
+      </div>
 
-    <div>
-      <label>How often do you use drugs in a week?
-        <input type="number" value="{{drugs}}" placeholder="begin typing..." name="drugs">
-      </label>
-    </div>
+      <div>
+        <label>Do you have any allergies?
+          <input type="radio" name="allergies" value="yes">Yes
+          <input type="radio" name="allergies" value="no">No 
+        </label>
+      </div>
 
-    <div>
-      <label>How often do you attend health checkups in a year?
-        <input type="number" value="{{checkups}}" placeholder="begin typing..." name="checkups">
-      </label>
-    </div>
+      <div>
+        <label>How often do you exercise in a week?
+          <input type="number" value="{{exercise}}" placeholder="begin typing..." name="exercise">
+        </label>
+      </div>
+      
+      <div>
+        <label>How often do you engage in meditation or relaxation practices?
+          <input type="number" value="{{meditation}}" placeholder="begin typing..." name="meditation">
+        </label>
+      </div>
 
-    <div>
-      <label>How often do you use exercise in a week?
-        <input type="number" value="{{exercise}}" placeholder="begin typing..." name="exercise">
-      </label>
-    </div>
+      <div>
+        <label>How many hours of sleep do you get per night?
+          <input type="number" value="{{sleep}}" placeholder="begin typing..." name="sleep">
+        </label>
+      </div>
 
-    <div>
-      <label>How many hours of sleep do you get per night?
-        <input type="number" value="{{sleep}}" placeholder="begin typing..." name="sleep">
-      </label>
-    </div>
+      <div>
+        <label>How often do you attend health checkups in a year?
+          <input type="number" value="{{checkups}}" placeholder="begin typing..." name="checkups">
+        </label>
+      </div>
+      
+      <div>
+          <label>Have you ever had a stroke?
+            <input type="radio" name="stroke" value="yes">Yes
+            <input type="radio" name="stroke" value="no">No 
+            <!-- want to ask how many times if yes is pressed-->
+          </label>
+      </div>
+
+      <div>
+        <label>Do you have type one diabetes?
+          <input type="radio" name="onediabetes" value="yes">Yes
+          <input type="radio" name="onediabetes" value="no">No 
+        </label>
+      </div>
+
+      <div>
+        <label>Do you have type two diabetes?
+          <input type="radio" name="twodiabetes" value="yes">Yes
+          <input type="radio" name="twodiabetes" value="no">No 
+        </label>
+      </div>
+
+      <div>
+        <label>How often do you use alcohol in a week?
+          <input type="number" value="{{alcohol}}" placeholder="begin typing..." name="alcohol">
+        </label>
+      </div>
+
+      <div>
+        <label>How often do you use drugs in a week?
+          <input type="number" value="{{drugs}}" placeholder="begin typing..." name="drugs">
+        </label>
+      </div>
+
+      <div>
+        <label>Do you have any psychological illnesses/disorders?
+          <input type="radio" name="disorders" value="yes">Yes
+          <input type="radio" name="disorders" value="no">No 
+        </label>
+      </div>
+
+      <div>
+        <label>How healthy do you feel?
+          <input type="range" min="1" max="10" value="5" name="feelhealthy" oninput="this.nextElementSibling.value = this.value">
+          <output>5</output>
+        </label>
+      </div>
+    </form>
 
   </body>
 

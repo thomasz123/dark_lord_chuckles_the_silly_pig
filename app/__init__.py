@@ -1,6 +1,10 @@
 import random
 from flask import Flask, redirect, render_template, request, session, url_for
+import utl.tables as tables
+
 app = Flask(__name__) 
+
+tables.setup()
 
 @app.route("/")       
 def auth(): 
@@ -15,8 +19,8 @@ def login():
         return render_template('home.html')
     return render_template('login.html')  #if no session, will prompt to login
 
-# @app.route("/register")
-# def register():
+@app.route("/register", methods = ['GET', 'POST'])
+def register():
 
 
 # @app.route("/verifylogin", methods = ['GET', 'POST'])
