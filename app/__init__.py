@@ -3,17 +3,17 @@ from flask import Flask, redirect, render_template, request, session, url_for
 app = Flask(__name__) 
 
 @app.route("/")       
-def auth():
-#   if 'username' in session
+def auth(): 
+    if not 'username' in session:
+        return render_template('home.html')
+    else:
+        return render_template('auth.html')
 
-
-    return render_template('auth.html')
-
-# @app.route("/login")
-# def login():
-#     if 'username' in session: #if there is a session going on, will direct to home page
-#         return render_template('home.html')
-#     return render_template('login.html')  #if no session, will prompt to login
+@app.route("/login")
+def login():
+    if 'username' in session: #if there is a session going on, will direct to home page
+        return render_template('home.html')
+    return render_template('login.html')  #if no session, will prompt to login
 
 # @app.route("/register")
 # def register():

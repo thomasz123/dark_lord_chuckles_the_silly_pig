@@ -27,6 +27,22 @@ dianaA -- 2023-04-28 13:15
 * Set up initial files, added flag.
 ==============================================================
 
+laurenL, dianaA, thomasZ -- 2023-05-03 14:00
+--------------------------------------------------------------
+* We reviewed the feedback we received from peer review and 
+this is what we found:
+- We need to add an actual table to help visualize the SQLite
+tables.
+- Expand on how we will incorporate the API into our project
+- Users table should probably have more tables to track the
+users info, not just username and password. 
+- Expand on questions being asked. Give specific examples.
+
+thomasZ, dianaA -- 2023-05-03 23:00
+--------------------------------------------------------------
+* Revised design doc in accordance with the feedback we received. 
+==============================================================
+
 laurenL -- 2023-05-04 00:46
 --------------------------------------------------------------
 * Revised design doc with more information regarding questionare, visulizations, and databases.
@@ -36,3 +52,8 @@ thomasZ, laurenL, dianaA -- 2023-05-04 13:18
 --------------------------------------------------------------
 * Set up Flask app, set up HTML page with linked JS.
 ==============================================================
+
+thomasZ - 2023-05-04 13:18
+--------------------------------------------------------------
+set up routes needed for logging in and registering
+started working on html for login, register, landing

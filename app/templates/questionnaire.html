@@ -1,26 +1,94 @@
 <!DOCTYPE html>
-html>
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <title>form</title>
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-        <link href="../static/css/style.css" rel="stylesheet">     
-    </head>
+<html>
+  <head>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>form</title>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+      <link href="../static/css/style.css" rel="stylesheet">     
+  </head>
 
-    <body> 
-        <div class="cell small-12">
-            <label>Height
-              <input type="text" value="{{height}}" placeholder="67" name="height" aria-describedby="heighttext" required pattern="[0-9]{2}">
-            </label>
-            <p class="help-text" id="helptextheight">Your height <b>in inches!</b></p>
-          </div>
-          <div class="cell small-12">
-            <label>Weight
-              <input type="text" value="{{height}}" placeholder="67" name="height" aria-describedby="heighttext" required pattern="[0-9]{2}">
-            </label>
-            <p class="help-text" id="helptextheight">Your height <b>in inches!</b></p>
-          </div>
-    </body>
+  <body> 
+    <div>
+      <label>Height
+        <input type="number" value="{{height}}" placeholder="begin typing..." name="height">
+      </label>
+      <p class="help-text" id="helptextheight">Your height <b>in inches!</b></p>
+    </div>
+    
+    <div>
+      <label>Weight
+        <input type="number" value="{{weight}}" placeholder="begin typing..." name="weight">
+      </label>
+      <p class="help-text" id="helptextweight">Your weight <b>in inches!</b></p>
+    </div>
+
+    <div>
+      <label>Age
+        <input type="number" value="{{age}}" placeholder="begin typing..." name="age">
+      </label>
+      <p class="help-text" id="helptextage">Your age <b>in years!</b></p>
+    </div>
+
+    <div>
+      <label>How healthy do you feel?
+        <input type="range" min="1" max="10" value="5" name="age" oninput="this.nextElementSibling.value = this.value">
+        <output>5</output>
+      </label>
+    </div>
+    
+    <div>
+        <label>Have you ever had a stroke?
+          <input type="radio" name="stroke" value="yes">Yes
+          <input type="radio" name="stroke" value="no">No 
+          <!-- want to ask how mamy times if press yes-->
+        </label>
+    </div>
+
+    <div>
+      <label>Do you have type two diabetes?
+        <input type="radio" name="stroke" value="yes">Yes
+        <input type="radio" name="stroke" value="no">No 
+      </label>
+    </div>
+
+    <div>
+      <label>Do you have type one diabetes?
+        <input type="radio" name="stroke" value="yes">Yes
+        <input type="radio" name="stroke" value="no">No 
+      </label>
+    </div>
+
+    <div>
+      <label>How often do you use alcohol in a week?
+        <input type="number" value="{{alcohol}}" placeholder="begin typing..." name="alcohol">
+      </label>
+    </div>
+
+    <div>
+      <label>How often do you use drugs in a week?
+        <input type="number" value="{{drugs}}" placeholder="begin typing..." name="drugs">
+      </label>
+    </div>
+
+    <div>
+      <label>How often do you attend health checkups in a year?
+        <input type="number" value="{{checkups}}" placeholder="begin typing..." name="checkups">
+      </label>
+    </div>
+
+    <div>
+      <label>How often do you use exercise in a week?
+        <input type="number" value="{{exercise}}" placeholder="begin typing..." name="exercise">
+      </label>
+    </div>
+
+    <div>
+      <label>How many hours of sleep do you get per night?
+        <input type="number" value="{{sleep}}" placeholder="begin typing..." name="sleep">
+      </label>
+    </div>
+
+  </body>
 
 </html>
