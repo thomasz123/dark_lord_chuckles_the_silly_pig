@@ -6,10 +6,10 @@
 * Diana Akhmedova - Role
 
 ## Description of Website/App
-* Placeholder
+* The purpose of our website is to use provided data about a person's health to create visualizations. The visualizations include various diagrams, graphs and charts that help the user detect their health trend. The website also provides diet and exercise recommendations and plans based on the given data. Users of the website have the ability to create a personalized schedule and calendar using said diet and exercise plans. 
 
 ## APIs Used
-* Placeholder
+* Recipes API
 
 ## Launch Codes
 ```
