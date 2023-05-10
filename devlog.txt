@@ -55,19 +55,30 @@ thomasZ, laurenL, dianaA -- 2023-05-04 13:18
 
 thomasZ - 2023-05-08 13:18
 --------------------------------------------------------------
-* set up routes needed for logging in and registering
-started working on html for login, register, landing
+* Set up routes needed for logging in and registering.
+* Started working on html for login, register, landing.
 ==============================================================
 
 thomasZ - 2023-05-08 22:30
 --------------------------------------------------------------
-updated README in accordance with instructions
+* Updated README in accordance with instructions.
 ==============================================================
 
-laurenL - 2023-05-09 23:38
+dianaA - 2023-05-09 13:21
 --------------------------------------------------------------
-*thomas working on register/login
-*diana created sql tables
-Data conduit: Lauren read in the heart disease related data from csv files in the heart.py function and outputed a cleaner version of the data into a csv files. Using JS, Diana displayed the first five rows of the data on the website.
+* Updated README with data descriptions and links.
+* Finished questionnaire and created the SQLite table for it.
 ==============================================================
 
+thomasZ - 2023-05-09 13:21
+--------------------------------------------------------------
+* Worked on registration and login.
+==============================================================
+
+laurenL, dianaA - 2023-05-09 23:38
+--------------------------------------------------------------
+* DATA CONDUIT:
+    * Lauren read in the heart disease related data from csv files in the heart.py
+      function and outputed a cleaner version of the data into a csv files.
+    * Using JS, Diana displayed the CSV data as a table on the website.
+==============================================================
