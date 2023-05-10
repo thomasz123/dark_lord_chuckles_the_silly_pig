@@ -64,3 +64,10 @@ thomasZ - 2023-05-08 22:30
 updated README in accordance with instructions
 ==============================================================
 
+laurenL - 2023-05-09 23:38
+--------------------------------------------------------------
+*thomas working on register/login
+*diana created sql tables
+Data conduit: Lauren read in the heart disease related data from csv files in the heart.py function and outputed a cleaner version of the data into a csv files. Using JS, Diana displayed the first five rows of the data on the website.
+==============================================================
+
