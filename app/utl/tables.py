@@ -7,7 +7,7 @@ def setup():
     c.execute("create table if not exists users(username text primary key, password text);")
     c.execute("create table if not exists questionnaire(height INTEGER, weight INTEGER, sex INTEGER, age INTEGER, eathealthy INTEGER, allergies INTEGER, exercise INTEGER, meditation INTEGER, sleep INTEGER, checkups INTEGER, stroke INTEGER, onediabetes INTEGER, twodiabetes INTEGER, alcohol INTEGER, drugs INTEGER, disorders INTEGER, feelhealthy INTEGER);")
     c.execute("insert into questionnaire values(160, 110, 1, 17, 7, 1, 3, 0, 9, 2, 0, 1, 0, 1, 0, 1, 5);")
-	db.commit()
+    db.commit()
     db.close()
 
 def register():
