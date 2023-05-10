@@ -9,5 +9,5 @@ data=data.drop(columns=['hypertension','ever_married', 'work_type', 'Residence_t
 #plot male and female lines showing correlation between age and 
 
 #write modified csv into a file
-data.to_csv("heart_disease.csv", header=0)
+data.to_csv("heart_disease.csv", index=False)
 
