@@ -9,12 +9,13 @@
   </head>
 
   <body>
-    <form action="">
+    <form action="/questionnaire" method="POST">
       <div>
         <label>Height
           <input type="number" value="{{height}}" placeholder="begin typing..." name="height">
         </label>
         <p class="help-text" id="helptextheight">Your height <b>in inches!</b></p>
+        {{height}}
       </div>
       
       <div>
@@ -22,6 +23,7 @@
           <input type="number" value="{{weight}}" placeholder="begin typing..." name="weight">
         </label>
         <p class="help-text" id="helptextweight">Your weight <b>in inches!</b></p>
+        {{weight}}
       </div>
 
       <div>
@@ -30,6 +32,7 @@
           <input type="radio" name="sex" value="male">Male 
         </label>
       </div>
+      {{sex}}
 
       <div>
         <label>Age
@@ -37,13 +40,15 @@
         </label>
         <p class="help-text" id="helptextage">Your age <b>in years!</b></p>
       </div>
-
+      {{age}}
+ 
       <div>
         <label>How healthy do you eat?
           <input type="range" min="1" max="10" value="5" name="eathealthy" oninput="this.nextElementSibling.value = this.value">
           <output>5</output>
         </label>
       </div>
+      {{eathealthy}}
 
       <div>
         <label>Do you have any allergies?
@@ -51,30 +56,35 @@
           <input type="radio" name="allergies" value="no">No 
         </label>
       </div>
+      {{allergies}}
 
       <div>
         <label>How often do you exercise in a week?
           <input type="number" value="{{exercise}}" placeholder="begin typing..." name="exercise">
         </label>
       </div>
+      {{exercise}}
       
       <div>
         <label>How often do you engage in meditation or relaxation practices?
           <input type="number" value="{{meditation}}" placeholder="begin typing..." name="meditation">
         </label>
       </div>
+      {{meditation}}
 
       <div>
         <label>How many hours of sleep do you get per night?
           <input type="number" value="{{sleep}}" placeholder="begin typing..." name="sleep">
         </label>
       </div>
+      {{sleep}}
 
       <div>
         <label>How often do you attend health checkups in a year?
           <input type="number" value="{{checkups}}" placeholder="begin typing..." name="checkups">
         </label>
       </div>
+      {{checkups}}
       
       <div>
           <label>Have you ever had a stroke?
@@ -83,6 +93,7 @@
             <!-- want to ask how many times if yes is pressed-->
           </label>
       </div>
+      {{stroke}}
 
       <div>
         <label>Do you have type one diabetes?
@@ -90,6 +101,7 @@
           <input type="radio" name="onediabetes" value="no">No 
         </label>
       </div>
+      {{onediabetes}}
 
       <div>
         <label>Do you have type two diabetes?
@@ -97,18 +109,21 @@
           <input type="radio" name="twodiabetes" value="no">No 
         </label>
       </div>
+      {{twodiabetes}}
 
       <div>
         <label>How often do you use alcohol in a week?
           <input type="number" value="{{alcohol}}" placeholder="begin typing..." name="alcohol">
         </label>
       </div>
+      {{alcohol}}
 
       <div>
         <label>How often do you use drugs in a week?
           <input type="number" value="{{drugs}}" placeholder="begin typing..." name="drugs">
         </label>
       </div>
+      {{drugs}}
 
       <div>
         <label>Do you have any psychological illnesses/disorders?
@@ -116,6 +131,7 @@
           <input type="radio" name="disorders" value="no">No 
         </label>
       </div>
+      {{disorders}}
 
       <div>
         <label>How healthy do you feel?
@@ -123,6 +139,7 @@
           <output>5</output>
         </label>
       </div>
+      {{feelhealthy}}
 
       <div>
           <input type="submit" name="submit" value="Submit">

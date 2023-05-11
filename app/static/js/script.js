@@ -50,5 +50,4 @@ function displayResults() {
   } else {
     alert("Please select a file.");
   }
-
 }
