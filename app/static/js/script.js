@@ -19,6 +19,27 @@
 
 // facB.addEventListener("click", () => runFac());
 
+
+import { createRequire } from 'module';
+const require = createRequire(import.meta.url);
+
+function displayQuestionnaire() {
+  var sqlite3 = require('sqlite3').verbose();
+  let db = new sqlite3.Database('../../question.db');
+  let sql = `SELECT height FROM questionnaire;`;
+
+  db.all(sql, [], (err, rows) => {
+    if (err) {
+      throw err;
+    }
+    rows.forEach((row) => {
+      console.log(row.name);
+    });
+  });
+  db.close();
+}
+
+
 function displayResults() {
   var files = document.querySelector('#file').files;
 

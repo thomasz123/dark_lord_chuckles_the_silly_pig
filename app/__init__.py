@@ -58,7 +58,9 @@ def questionVals():
     c.execute("INSERT INTO questionnaire VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);", (_height, _weight, _sex, _age, _eathealthy, _allergies, _exercise, _meditation, _sleep, _checkups, _stroke, _onediabetes, _twodiabetes, _alcohol, _drugs, _disorders, _feelhealthy))
     db.commit()
 
-    return render_template('questionnaire.html', height=_height, weight=_weight, sex=_sex, age=_age, eathealthy=_eathealthy, allergies=_allergies, exercise=_exercise, meditation=_meditation, sleep=_sleep, checkups=_checkups, stroke=_stroke, onediabetes=_onediabetes, twodiabetes=_twodiabetes, alcohol=_alcohol, drugs=_drugs, disorders=_disorders, feelhealthy=_feelhealthy)
+    return render_template('results.html')
+
+    #return render_template('questionnaire.html', height=_height, weight=_weight, sex=_sex, age=_age, eathealthy=_eathealthy, allergies=_allergies, exercise=_exercise, meditation=_meditation, sleep=_sleep, checkups=_checkups, stroke=_stroke, onediabetes=_onediabetes, twodiabetes=_twodiabetes, alcohol=_alcohol, drugs=_drugs, disorders=_disorders, feelhealthy=_feelhealthy)
 
 
 # @app.route("/verifylogin", methods = ['GET', 'POST'])
