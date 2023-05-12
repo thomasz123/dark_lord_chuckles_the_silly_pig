@@ -1,0 +1,154 @@
+body {
+    background-color: #fee8d1;
+    color: #662f2c;
+}
+
+.page {
+    margin-top: 60px;
+}
+
+.homepage {
+    margin-top: 60px;
+    margin-left: 60px;
+    margin-right: 60px;
+}
+
+.pink {
+    align-items: center;
+    text-align: center;
+    background-color: #fcbab6;
+}
+
+::placeholder {
+    font-size: 1em;
+}
+
+#teamname {
+    align-items: center;
+    text-align: center;
+}
+
+#loginscreen {
+    align-items: center;
+    text-align: center;
+}
+
+input {
+    border-radius: 10px;
+}
+
+.form-outline {
+    width: 400px;
+    align-items: center;
+    text-align: center;
+}
+
+.register {
+    background-color: #d15667;
+}
+
+.center {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.form-floating {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;    
+}
+
+.sign {
+    background-color: #b56271;
+}
+
+/* #display-item {
+    display: none;
+}
+
+#display-section-2 {
+    display: none;
+}
+
+#display-yes-no {
+    display: none;
+}
+
+#display-section-3 {
+    display: none;
+}
+
+#display-love-calc {
+    display: none;
+}
+
+#display-section-4 {
+    display: none;
+}
+
+#display-summary {
+    display: none;
+}
+
+.accordion-collapse{
+    background-color: #fcbab6;
+}
+
+#date {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#summary {
+    text-align: center;
+    background-color: #fcbab6;
+    border-radius: 15px;
+}
+
+#logo {
+    width: 20%;
+}
+
+.item-img {
+    width: 50%
+}
+
+#image_date {
+    width: 50%;
+}
+
+#carousel_image1 {
+    width: 30%;
+}
+
+#carousel_image2 {
+    width: 50%;
+}
+
+.card-body {
+    background-color: #ffd6d6;
+}
+
+.accordion-header .accordion-item {
+    background-color: #ffd6d6;
+    color: #662f2c;
+}
+
+.carousel-control-prev-icon {
+    background-color: #662f2c;
+    border-radius: 15px;
+    padding: 15%;
+}
+
+.carousel-control-next-icon {
+    background-color: #662f2c;
+    border-radius: 15px;
+    padding: 15%;
+}
+
+.carousel-indicators {
+    background-color: #662f2c;
+    border-radius: 25px;
+} */
