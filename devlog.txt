@@ -88,3 +88,10 @@ dianaA - 2023-05-11 02:47
 * Linked questionnaire form data to SQLite table.
 * Form submission successful, answers temporarily displayed on the same page.
 ==============================================================
+
+dianaA - 2023-05-12 01:17
+--------------------------------------------------------------
+* Finished registration and login pages.
+* Created a nav bar that links to the home, questionnaire, results, and recommendations pages.
+* Added CSS to make the website more user-friendly.
+==============================================================
