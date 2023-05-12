@@ -23,6 +23,7 @@ data.to_sql('heart',db,if_exists='replace',index=False)
 data.to_csv("heart_disease.csv", index=False)
 
 table = c.execute("SELECT * FROM heart;").fetchall()
+print(table)
 db.commit()
 db.close()
 

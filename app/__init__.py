@@ -1,5 +1,6 @@
 import random
 import sqlite3
+import pandas as pd
 from flask import Flask, redirect, render_template, request, session, url_for
 #import utl.tables as tables
 
@@ -24,6 +25,17 @@ db2.commit()
 # flask
 app = Flask(__name__)
 app.secret_key = 'a\8$x5T!H2P7f\m/rwd[&'
+
+#heart
+#replace file paths with your own
+data = pd.read_csv('data/archive/healthcare-dataset-stroke-data.csv')
+
+#drop irrelevent columns
+data=data.drop(columns=['hypertension','ever_married', 'work_type', 'Residence_type', 'avg_glucose_level'])
+
+
+#plot male and female lines showing correlation between age and 
+
 
 #tables.setup()
 
@@ -128,7 +140,30 @@ def questionVals():
 
 @app.route("/results")
 def results():
-    return render_template('results.html')
+    DB_FILE_HEART="heart.db"
+    db3 = sqlite3.connect(DB_FILE_HEART)
+    c3 = db3.cursor()
+    c3.execute("create table if not exists heart(id INTEGER, gender TEXT, age INTEGER, disease INTEGER, bmi INTEGER, status TEXT, stroke INTEGER);")
+
+    data.to_sql('heart',db3,if_exists='replace',index=False)
+    #write modified csv into a file
+    data.to_csv("heart_disease.csv", index=False)
+
+    table_heart = c3.execute("SELECT * FROM heart;").fetchall()
+    db3.commit()
+    db3.close()
+
+    DB_FILE_QUESTION="question.db"
+    db4 = sqlite3.connect(DB_FILE_QUESTION)
+    c4 = db4.cursor()
+    
+    table_question = c4.execute("SELECT * FROM questionnaire;").fetchall()
+    db4.commit()
+    db4.close()
+
+    #TO DO: Add username as a parameter to questionnaire to display only their results
+
+    return render_template('results.html', disp=table_heart, ques=table_question)
 
 
 @app.route("/recommendations")
