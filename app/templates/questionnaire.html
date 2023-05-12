@@ -10,6 +10,37 @@
   </head>
 
   <body>
+    <div id="questionnairepage">
+      <h1>
+        Questionnaire
+      </h1>
+    </div>
+
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+          </button>
+
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('authenticate') }}">Home</a>
+                  </li>
+                  <li class="nav-item active">
+                      <a class="nav-link" href="{{ url_for('questions') }}">Questionnaire</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('results') }}">Results</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="{{ url_for('recommendations') }}">Recommendations</a>
+                  </li>
+              </ul>
+          </div>
+      </nav>
+    </div>
+
     <form action="/questionnaire" method="POST">
       <div>
         <label>Height
@@ -147,6 +178,12 @@
       </div>
     </form>
 
-  </body>
+    <!-- logout button -->
+    <form action="/logout">
+      <center><button class="btn btn-primary register">Logout</button></center>
+    </form>
 
+    <br><br><br>
+
+  </body>
 </html>

@@ -92,30 +92,10 @@ def logout():
     return redirect(url_for('index'))
 
 
+@app.route("/questions")
+def questions():
+    return render_template('questionnaire.html')
 
-
-
-
-
-# @app.route("/")       
-# def auth(): 
-#     if not 'username' in session:
-#         return render_template('home.html')
-#     else:
-#         return render_template('auth.html')
-
-# @app.route("/login")
-# def login():
-#     if 'username' in session: #if there is a session going on, will direct to home page
-#         return render_template('home.html')
-#     return render_template('login.html')  #if no session, will prompt to login
-
-# @app.route("/register", methods = ['GET', 'POST'])
-# def register():
-
-# @app.route("/")
-# def idk():
-#     return render_template('questionnaire.html')
 
 @app.route("/questionnaire", methods = ['GET', 'POST'])
 def questionVals():
@@ -142,17 +122,16 @@ def questionVals():
 
     return render_template('results.html')
 
-    #return render_template('questionnaire.html', height=_height, weight=_weight, sex=_sex, age=_age, eathealthy=_eathealthy, allergies=_allergies, exercise=_exercise, meditation=_meditation, sleep=_sleep, checkups=_checkups, stroke=_stroke, onediabetes=_onediabetes, twodiabetes=_twodiabetes, alcohol=_alcohol, drugs=_drugs, disorders=_disorders, feelhealthy=_feelhealthy)
+
+@app.route("/results")
+def results():
+    return render_template('results.html')
 
 
-# @app.route("/verifylogin", methods = ['GET', 'POST'])
-# def login():
-#     if (table_handlerpinegistrate(request.form["createusername"], request.form["createpassword"]) == False):
-#         flash("That username is already taken", "danger")
-#         return render_template('register.html')
-#     else:
-#         flash("Successfully signed up!", "success")
-#         return render_template('login.html')
+@app.route("/recommendations")
+def recommendations():
+    return render_template('recommendations.html')
+
         
 if __name__ == "__main__":  # true if this file NOT imported
     app.debug = True        # enable auto-reload upon code change
