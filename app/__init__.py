@@ -27,6 +27,7 @@ app.secret_key = 'a\8$x5T!H2P7f\m/rwd[&'
 
 #tables.setup()
 
+
 @app.route("/")
 def index():
     # if there is a session in place, divert the user to the main page
@@ -35,10 +36,11 @@ def index():
     else:
         return render_template('login.html', login="Not logged in!")
 
+
+# ACCOUNT INFO CHECK
 @app.route('/home', methods=['GET', 'POST'])
 def authenticate():
 
-    ##### ACCOUNT INFO CHECK
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -57,10 +59,11 @@ def authenticate():
     
     return render_template('home.html', status="Successfully logged in!")
 
-########################### LOGGING IN SYSTEM ###########################
+
+# LOGGING IN SYSTEM
 @app.route("/register")
 def register():
-    return render_template('register.html')
+    return render_template('register.html', status="Register here!")
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
@@ -136,7 +139,3 @@ def recommendations():
 if __name__ == "__main__":  # true if this file NOT imported
     app.debug = True        # enable auto-reload upon code change
     app.run()
-
-#  <p>Use the arrow keys to navigate through the maze!</p>                                                                         <canvas id="maze"></canvas>                                                                                             <script src="maze.js"></script>                                                                                 </div>                                                                                                             
-#  <script type="text/javascript" src="{{ url_for('static', filename='js/maze.js') }}"></script> 
-#  <script src="maze.js"></script>

@@ -9,17 +9,19 @@
     <link href="../static/css/style.css" rel="stylesheet">
   </head>
 
-  <body class="homepage">
-    <h1>
-      Dark Lord Chuckles the Silly Pig's Diet and Exercise Recommendations
-    </h1>
+  <body>
+    <div class="header">
+        <h1 style="margin-left: 30px; margin-right: 30px;">
+            Dark Lord Chuckles the Silly Pig's Diet and Exercise Recommendations
+        </h1>
 
-    <h2>
-      Thomas Zhang, Lauren Lee, Diana Akhmedova
-    </h2>
+        <h5 style="margin-left: 30px; margin-right: 30px;">
+            Thomas Zhang, Lauren Lee, Diana Akhmedova
+        </h5>
+    </div>
     
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="contain">
+        <nav class="navbar navbar-expand-lg" style="margin-left: 30px; margin-right: 30px;">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -43,16 +45,19 @@
         </nav>
     </div>
 
-    <br>
-    {{status}}
-    <br><br>
+    <div class="homepage">
 
-    <!-- logout button -->
-    <form action="/logout">
-        <center><button class="btn btn-primary register">Logout</button></center>
-    </form>
-  
-    <br><br><br>
+        <br>
+        {{status}}
+        <br><br>
+
+        <!-- logout button -->
+        <form action="/logout">
+            <center><button class="btn btn-primary register">Logout</button></center>
+        </form>
+    
+        <br><br><br>
+    </div>
   
   </body>
 </html>

@@ -9,15 +9,15 @@
     <link href="../static/css/style.css" rel="stylesheet">
   </head>
 
-  <body class="page">
-    <div id="recommendationspage">
-      <h1>
+  <body>
+    <div class="header">
+      <h1 style="margin-left: 30px; margin-right: 30px;">
         Recommendations
       </h1>
     </div>
 
-    <div class="container">
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="contain">
+        <nav class="navbar navbar-expand-lg" style="margin-left: 30px; margin-right: 30px;">
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -41,12 +41,17 @@
         </nav>
     </div>
 
-    <!-- logout button -->
-    <form action="/logout">
-        <center><button class="btn btn-primary register">Logout</button></center>
-    </form>
+    <div class="homepage">
 
-    <br><br><br>
+        <br><br>
+
+        <!-- logout button -->
+        <form action="/logout">
+            <center><button class="btn btn-primary register">Logout</button></center>
+        </form>
+
+        <br><br><br>
+    </div>
 
   </body>
 </html>

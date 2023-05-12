@@ -1,10 +1,6 @@
 body {
-    background-color: #fee8d1;
-    color: #662f2c;
-}
-
-.page {
-    margin-top: 60px;
+    background-color: #ffffff;
+    color: #252525;
 }
 
 .homepage {
@@ -13,10 +9,24 @@ body {
     margin-right: 60px;
 }
 
-.pink {
+.contain {
+    background-color: #252525;
+}
+
+.nav-link {
+    color: #ffffff;
+}
+
+.green {
     align-items: center;
     text-align: center;
-    background-color: #fcbab6;
+    background-color: #d5f4ea;
+}
+
+.header {
+    background-color: #57d07c;
+    padding-top: 30px;
+    padding-bottom: 30px;
 }
 
 ::placeholder {
@@ -44,7 +54,7 @@ input {
 }
 
 .register {
-    background-color: #d15667;
+    background-color: #57d07c;
 }
 
 .center {
@@ -61,7 +71,7 @@ input {
 }
 
 .sign {
-    background-color: #b56271;
+    background-color: #57d07c;
 }
 
 /* #display-item {
