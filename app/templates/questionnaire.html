@@ -45,6 +45,14 @@
 
       <form action="/questionnaire" method="POST">
         <div>
+          <label>1. Name
+            <input type="text" value="{{name}}" placeholder="begin typing..." name="name" required>
+          </label>
+          {{name}}
+        </div>
+
+        <br>
+        <div>
           <label>1. Height
             <input type="number" value="{{height}}" placeholder="begin typing..." name="height" required>
           </label>

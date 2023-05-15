@@ -80,6 +80,7 @@
                 <table id="tblcsvdata" border="1" style="border-collapse: collapse;">
                     <thead>
                         <tr>
+                            <th>Name</th>
                             <th>Height</th>
                             <th>Weight</th>
                             <th>Sex</th>
@@ -98,13 +99,13 @@
                             <th>Psychological Disorders</th>
                             <th>Feel Healthy</th>
                         </tr>
-                        {% for item in ques %} 
+                        <!--{% for item in ques %} -->
                             <tr> 
-                                {% for x in item %} 
+                                {% for x in ques %} 
                                     <td>{{ x }}</td> 
                                 {% endfor %}
                             </tr>
-                        {% endfor %}
+                       <!-- {% endfor %} -->
                     </thead>
                     <tbody>
                     </tbody>

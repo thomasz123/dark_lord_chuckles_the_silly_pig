@@ -18,7 +18,7 @@ command1 = "create table IF NOT EXISTS login(user TEXT, password TEXT)"
 c1.execute(command1)
 db1.commit()
 
-command2 = "create table IF NOT EXISTS questionnaire(height INTEGER, weight INTEGER, sex INTEGER, age INTEGER, eathealthy INTEGER, allergies INTEGER, exercise INTEGER, meditation INTEGER, sleep INTEGER, checkups INTEGER, stroke INTEGER, onediabetes INTEGER, twodiabetes INTEGER, alcohol INTEGER, drugs INTEGER, disorders INTEGER, feelhealthy INTEGER);"
+command2 = "create table IF NOT EXISTS questionnaire(user TEXT, name TEXT, height INTEGER, weight INTEGER, sex INTEGER, age INTEGER, eathealthy INTEGER, allergies INTEGER, exercise INTEGER, meditation INTEGER, sleep INTEGER, checkups INTEGER, stroke INTEGER, onediabetes INTEGER, twodiabetes INTEGER, alcohol INTEGER, drugs INTEGER, disorders INTEGER, feelhealthy INTEGER);"
 c2.execute(command2)
 db2.commit()
 
@@ -114,6 +114,7 @@ def questions():
 
 @app.route("/questionnaire", methods = ['GET', 'POST'])
 def questionVals():
+    _name = request.form['name']
     _height = request.form['height']
     _weight = request.form['weight']
     _sex = request.form['sex']
@@ -132,7 +133,7 @@ def questionVals():
     _disorders = request.form['disorders']
     _feelhealthy = request.form['feelhealthy']
 
-    c2.execute("INSERT INTO questionnaire VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);", (_height, _weight, _sex, _age, _eathealthy, _allergies, _exercise, _meditation, _sleep, _checkups, _stroke, _onediabetes, _twodiabetes, _alcohol, _drugs, _disorders, _feelhealthy))
+    c2.execute("INSERT INTO questionnaire VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);", (session['username'], _name, _height, _weight, _sex, _age, _eathealthy, _allergies, _exercise, _meditation, _sleep, _checkups, _stroke, _onediabetes, _twodiabetes, _alcohol, _drugs, _disorders, _feelhealthy))
     db2.commit()
 
     return render_template('results.html')
@@ -156,8 +157,7 @@ def results():
     DB_FILE_QUESTION="question.db"
     db4 = sqlite3.connect(DB_FILE_QUESTION)
     c4 = db4.cursor()
-    
-    table_question = c4.execute("SELECT * FROM questionnaire;").fetchall()
+    table_question = c4.execute("SELECT name, height, weight, sex, age, eathealthy, allergies, exercise, meditation, sleep FROM questionnaire WHERE user = session['username'] ;").fetchall()
     db4.commit()
     db4.close()
 
