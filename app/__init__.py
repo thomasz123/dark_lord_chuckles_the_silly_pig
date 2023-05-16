@@ -114,29 +114,34 @@ def questions():
 
 @app.route("/questionnaire", methods = ['GET', 'POST'])
 def questionVals():
-    _name = request.form['name']
-    _height = request.form['height']
-    _weight = request.form['weight']
-    _sex = request.form['sex']
-    _age = request.form['age']
-    _eathealthy = request.form['eathealthy']
-    _allergies = request.form['allergies']
-    _exercise = request.form['exercise']
-    _meditation = request.form['meditation']
-    _sleep = request.form['sleep']
-    _checkups = request.form['checkups']
-    _stroke = request.form['stroke']
-    _onediabetes = request.form['onediabetes']
-    _twodiabetes = request.form['twodiabetes']
-    _alcohol = request.form['alcohol']
-    _drugs = request.form['drugs']
-    _disorders = request.form['disorders']
-    _feelhealthy = request.form['feelhealthy']
+    print(request.method)
+    if request.method == 'POST':
+        _name = request.form['name']
+        _height = request.form['height']
+        _weight = request.form['weight']
+        _sex = request.form['sex']
+        _age = request.form['age']
+        _eathealthy = request.form['eathealthy']
+        _allergies = request.form['allergies']
+        _exercise = request.form['exercise']
+        _meditation = request.form['meditation']
+        _sleep = request.form['sleep']
+        _checkups = request.form['checkups']
+        _stroke = request.form['stroke']
+        _onediabetes = request.form['onediabetes']
+        _twodiabetes = request.form['twodiabetes']
+        _alcohol = request.form['alcohol']
+        _drugs = request.form['drugs']
+        _disorders = request.form['disorders']
+        _feelhealthy = request.form['feelhealthy']
 
-    c2.execute("INSERT INTO questionnaire VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);", (session['username'], _name, _height, _weight, _sex, _age, _eathealthy, _allergies, _exercise, _meditation, _sleep, _checkups, _stroke, _onediabetes, _twodiabetes, _alcohol, _drugs, _disorders, _feelhealthy))
-    db2.commit()
-
-    return render_template('results.html')
+        #should replace values when new answers are submited
+        c2.execute("DELETE FROM questionnaire WHERE user = (?)", (session['username'],))
+        c2.execute("INSERT INTO questionnaire VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);", (session['username'], _name, _height, _weight, _sex, _age, _eathealthy, _allergies, _exercise, _meditation, _sleep, _checkups, _stroke, _onediabetes, _twodiabetes, _alcohol, _drugs, _disorders, _feelhealthy))
+        db2.commit()
+        
+        return redirect(url_for('results'))
+    render_template('results.html')
 
 
 @app.route("/results")
@@ -157,7 +162,7 @@ def results():
     DB_FILE_QUESTION="question.db"
     db4 = sqlite3.connect(DB_FILE_QUESTION)
     c4 = db4.cursor()
-    table_question = c4.execute("SELECT name, height, weight, sex, age, eathealthy, allergies, exercise, meditation, sleep FROM questionnaire WHERE user = session['username'] ;").fetchall()
+    table_question = c4.execute("SELECT name, height, weight, sex, age, eathealthy, allergies, exercise, meditation, sleep FROM questionnaire WHERE user = (?)", (session['username'],) ).fetchall()
     db4.commit()
     db4.close()
 
