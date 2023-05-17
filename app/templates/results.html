@@ -52,31 +52,7 @@
             
             <div>
                 <br><br>
-                <table id="tblcsvdata" border="1" style="border-collapse: collapse;">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Sex</th>
-                            <th>Age</th>
-                            <th>Heart Disease?</th>
-                            <th>BMI</th>
-                            <th>Smoking Status</th>
-                            <th>Stroke?</th>
-                        </tr>
-                        {% for item in disp %} 
-                            <tr> 
-                                {% for x in item %} 
-                                    <td>{{ x }}</td> 
-                                {% endfor %}
-                            </tr>
-                        {% endfor %}
-                    </thead>
-                    <tbody>
-                    </tbody>
-                </table>
-        
-                <br><br>
-
+                
                 <table id="tblcsvdata" border="1" style="border-collapse: collapse;">
                     <thead>
                         <tr>
@@ -99,13 +75,38 @@
                             <th>Psychological Disorders</th>
                             <th>Feel Healthy</th>
                         </tr>
-                        <!--{% for item in ques %} -->
+                        {% for item in ques %} 
                             <tr> 
-                                {% for x in ques %} 
+                                {% for x in item %} 
                                     <td>{{ x }}</td> 
                                 {% endfor %}
                             </tr>
-                       <!-- {% endfor %} -->
+                       {% endfor %}
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
+        
+                <br><br>
+
+                <table id="tblcsvdata" border="1" style="border-collapse: collapse;">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>Sex</th>
+                            <th>Age</th>
+                            <th>Heart Disease?</th>
+                            <th>BMI</th>
+                            <th>Smoking Status</th>
+                            <th>Stroke?</th>
+                        </tr>
+                        {% for item in disp %} 
+                            <tr> 
+                                {% for x in item %} 
+                                    <td>{{ x }}</td> 
+                                {% endfor %}
+                            </tr>
+                        {% endfor %}
                     </thead>
                     <tbody>
                     </tbody>
