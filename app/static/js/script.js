@@ -3,8 +3,8 @@ const ctx = document.getElementById('myChart').getContext('2d');
 const data = {
     labels: [0, 1, 2, 3, 4, 5],
         datasets: [{
-            label: 'Likelihood of Getting Heart Disease',
-            data: [0, 1, 2, 3, 4, 5],
+            label: 'Heart Disease',
+            data: [null, null, null, null, null],
             fill: false,
             borderColor: 'rgb(75, 192, 192)',
             tension: 0.1
@@ -13,23 +13,22 @@ const data = {
 
 const config = {
     scales: {
-        x: {
-            title: {
-                display: true,
-                text: 'Test',
-                color: 'red',
-                font: {
-                    size: 24,
-                    weight: 'bold'
-                }
+      xAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Age',
+            font: {
+              size: 24,
+              weight: 'bold' // MOT WORKING
             }
-        },
-        y: {
-            title: {
-                display: true,
-                text: 'asd'
-            }
-        }
+          },
+      }],
+      yAxes: [{
+          scaleLabel: {
+            display: true,
+            labelString: 'Likelihood of Heart Disease (%)'
+          }
+      }]
     }
 };
 
