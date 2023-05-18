@@ -1,98 +1,111 @@
-const data = {
-  'React': 185134,
-  'Vue': 195514,
-  'Angular': 80460,
-  'Svelte': 57022,
-  'Ember.js': 22165,
-  'Backbone.js': 27862
-};
-
 const ctx = document.getElementById('myChart').getContext('2d');
 
+const data = {
+    labels: [0, 1, 2, 3, 4, 5],
+        datasets: [{
+            label: 'Likelihood of Getting Heart Disease',
+            data: [0, 1, 2, 3, 4, 5],
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+        }]
+};
+
+const config = {
+    scales: {
+        x: {
+            title: {
+                display: true,
+                text: 'Test',
+                color: 'red',
+                font: {
+                    size: 24,
+                    weight: 'bold'
+                }
+            }
+        },
+        y: {
+            title: {
+                display: true,
+                text: 'asd'
+            }
+        }
+    }
+};
+
 const myChart = new Chart(ctx, {
-  type: 'bar',
-  data: {
-    labels: Object.keys(data),
-    datasets: [
-      {
-        label: 'Number of GitHub Stars',
-        data: Object.values(data),
-      },
-    ],
-  },
+    type: 'line',
+    data: data,
+    options: config
 });
 
-// function fac(n) {
-//     if (n < 2) {
-//         return 1;
-//     } return (n * fac(n - 1));
-// }
+const sex = document.getElementById("sexC");
+const heartdisease = document.getElementById("heartdiseaseC");
+const bmi = document.getElementById("bmiC");
+const smokingstatus = document.getElementById("smokingstatusC");
+const stroke = document.getElementById("strokeC");
 
-// console.log("RETURNING FACT...");
-// console.log(fac(1));
-// console.log(fac(3));
-// console.log(fac(5));
+sex.addEventListener('change', function() {
+    if (this.checked) {
+        console.log("Sex - Checked");
+        console.log(sex.value.split(","));
+        myChart.data.datasets[0].data = sex.value.split(",");
+        myChart.update();
+    } else {
+        console.log("Sex - Unchecked");
+        myChart.data.datasets[0].data = [null, null, null, null, null];
+        myChart.update();
+    }
+});
 
-// var facB = document.getElementById("facButton");
+heartdisease.addEventListener('change', function() {
+    if (this.checked) {
+        console.log("Heart Disease - Checked");
+        console.log(heartdisease.value.split(","));
+        myChart.data.datasets[0].data = heartdisease.value.split(",");
+        myChart.update();
+    } else {
+        console.log("Heart Disease - Unchecked");
+        myChart.data.datasets[0].data = [null, null, null, null, null];
+        myChart.update();
+    }
+});
 
-// function runFac() {
-//   var facT = document.getElementById("facText");
-//   facT = facT.value;
-//   document.getElementById("facPara").innerHTML = fac(facT);
-// }
+bmi.addEventListener('change', function() {
+  if (this.checked) {
+      console.log("BMI - Checked");
+      console.log(bmi.value.split(","));
+      myChart.data.datasets[0].data = bmi.value.split(",");
+      myChart.update();
+  } else {
+      console.log("BMI - Unchecked");
+      myChart.data.datasets[0].data = [null, null, null, null, null];
+      myChart.update();
+  }
+});
 
-// facB.addEventListener("click", () => runFac());
+smokingstatus.addEventListener('change', function() {
+  if (this.checked) {
+      console.log("Smoking Status - Checked");
+      console.log(smokingstatus.value.split(","));
+      myChart.data.datasets[0].data = smokingstatus.value.split(",");
+      myChart.update();
+  } else {
+      console.log("Smoking Status - Unchecked");
+      myChart.data.datasets[0].data = [null, null, null, null, null];
+      myChart.update();
+  }
+});
 
-
-// import { createRequire } from 'module';
-// const require = createRequire(import.meta.url);
-
-// function displayQuestionnaire() {
-//   var sqlite3 = require('sqlite3').verbose();
-//   let db = new sqlite3.Database('../../question.db');
-//   let sql = `SELECT height FROM questionnaire;`;
-
-//   db.all(sql, [], (err, rows) => {
-//     if (err) {
-//       throw err;
-//     }
-//     rows.forEach((row) => {
-//       console.log(row.name);
-//     });
-//   });
-//   db.close();
-// }
-
-
-// function displayResults() {
-//   var files = document.querySelector('#file').files;
-
-//   if (files.length > 0) {
-//     var file = files[0];
-//     console.log(file);
-
-//     var reader = new FileReader(); 
-//     reader.readAsText(file);
-
-//     reader.onload = function(event) {
-//       var csvdata = event.target.result;
-//       console.log(csvdata);
-
-//       var rowData = csvdata.split('\n');
-//       var tbodyEl = document.getElementById('tblcsvdata').getElementsByTagName('tbody')[0];
-//       tbodyEl.innerHTML = "";
-
-//       for (var row = 1; row < rowData.length; row++) {
-//         var newRow = tbodyEl.insertRow();
-//         rowColData = rowData[row].split(',');
-
-//         for (var col = 0; col < rowColData.length; col++) {
-//               var newCell = newRow.insertCell();
-//               newCell.innerHTML = rowColData[col];
-//         }
-//       }
-//     };
-//   } else {
-//     alert("Please select a file.");
-//   }
-// }
+stroke.addEventListener('change', function() {
+  if (this.checked) {
+      console.log("Stroke - Checked");
+      console.log(stroke.value.split(","));
+      myChart.data.datasets[0].data = stroke.value.split(",");
+      myChart.update();
+  } else {
+      console.log("Stroke - Unchecked");
+      myChart.data.datasets[0].data = [null, null, null, null, null];
+      myChart.update();
+  }
+});
