@@ -95,3 +95,31 @@ dianaA - 2023-05-12 01:17
 * Created a nav bar that links to the home, questionnaire, results, and recommendations pages.
 * Added CSS to make the website more user-friendly.
 ==============================================================
+
+laurenL, thomasZ - 2023-05-15 01:18
+--------------------------------------------------------------
+* looked for new dataset for diabetes and lung cancer
+* worked on fixing frontend (displaying table on results page)
+==============================================================
+
+dianaA, laurenL, thomasZ - 2023-05-16 01:18
+--------------------------------------------------------------
+* modify table outputs for questionnaire database for better displaying
+* discuss best visualization tool for the data
+==============================================================
+
+dianaA, laurenL, thomasZ - 2023-05-17 01:18
+--------------------------------------------------------------
+* decided on the visualization tool: chart.JS
+* fixed minor bugs
+==============================================================
+
+dianaA, laurenL, thomasZ - 2023-05-17 01:18
+--------------------------------------------------------------
+* Information our emissary, Lauren, gained from tours:
+- google charts:
+extensive documentation
+has checkboxes
+good line charts
+good UI 
+==============================================================
