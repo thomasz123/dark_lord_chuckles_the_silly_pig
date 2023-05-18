@@ -96,30 +96,35 @@ dianaA - 2023-05-12 01:17
 * Added CSS to make the website more user-friendly.
 ==============================================================
 
-laurenL, thomasZ - 2023-05-15 01:18
+laurenL, thomasZ - 2023-05-15 13:18
 --------------------------------------------------------------
-* looked for new dataset for diabetes and lung cancer
-* worked on fixing frontend (displaying table on results page)
+* Looked for a new dataset for diabetes and lung cancer.
+* Worked on fixing frontend (displaying table on results page).
 ==============================================================
 
-dianaA, laurenL, thomasZ - 2023-05-16 01:18
+dianaA, laurenL, thomasZ - 2023-05-16 13:15
 --------------------------------------------------------------
-* modify table outputs for questionnaire database for better displaying
-* discuss best visualization tool for the data
+* Modified table outputs for questionnaire database for better displaying.
+* Discuss best visualization tool for the data.
 ==============================================================
 
-dianaA, laurenL, thomasZ - 2023-05-17 01:18
+dianaA, laurenL, thomasZ - 2023-05-17 13:19
 --------------------------------------------------------------
-* decided on the visualization tool: chart.JS
-* fixed minor bugs
+* Decided on the visualization tool: Chart.js.
+* Fixed minor bugs.
 ==============================================================
 
-dianaA, laurenL, thomasZ - 2023-05-17 01:18
+dianaA, laurenL, thomasZ - 2023-05-17 13:21
 --------------------------------------------------------------
-* Information our emissary, Lauren, gained from tours:
-- google charts:
-extensive documentation
-has checkboxes
-good line charts
-good UI 
+* Information our emissary, Lauren, gained from tours...
+    - Google Charts:
+        - Extensive documentation
+        - Has checkboxes
+        - Good line charts
+        - Good UI
+==============================================================
+
+dianaA - 2023-05-17 15:13
+--------------------------------------------------------------
+* Made a test line chart that changes values depending on which boxes are checked using Chart.js.
 ==============================================================
