@@ -19,7 +19,7 @@ const config = {
             labelString: 'Age',
             font: {
               size: 24,
-              weight: 'bold' // MOT WORKING
+              weight: 'bold' // NOT WORKING
             }
           },
       }],
@@ -38,73 +38,111 @@ const myChart = new Chart(ctx, {
     options: config
 });
 
+var checkboxes = document.querySelectorAll("input[type=checkbox][name=settings]");
+console.log(checkboxes);
+let enabledSettings = [];
+
 const sex = document.getElementById("sexC");
 const heartdisease = document.getElementById("heartdiseaseC");
 const bmi = document.getElementById("bmiC");
 const smokingstatus = document.getElementById("smokingstatusC");
 const stroke = document.getElementById("strokeC");
 
-sex.addEventListener('change', function() {
-    if (this.checked) {
-        console.log("Sex - Checked");
-        console.log(sex.value.split(","));
-        myChart.data.datasets[0].data = sex.value.split(",");
-        myChart.update();
-    } else {
-        console.log("Sex - Unchecked");
-        myChart.data.datasets[0].data = [null, null, null, null, null];
-        myChart.update();
-    }
-});
+checkboxes.forEach(function(checkbox) {
+    checkbox.addEventListener('change', function() {
+        enabledSettings = 
+            Array.from(checkboxes) // Convert checkboxes to an array to use filter and map.
+            .filter(i => i.checked) // Use Array.filter to remove unchecked checkboxes.
+            .map(i => i.value) // Use Array.map to extract only the checkbox values from the array of objects.
+            
+        console.log(enabledSettings)
 
-heartdisease.addEventListener('change', function() {
-    if (this.checked) {
-        console.log("Heart Disease - Checked");
-        console.log(heartdisease.value.split(","));
-        myChart.data.datasets[0].data = heartdisease.value.split(",");
-        myChart.update();
-    } else {
-        console.log("Heart Disease - Unchecked");
-        myChart.data.datasets[0].data = [null, null, null, null, null];
-        myChart.update();
-    }
-});
+        // 4 (ALL) OPTIONS
+        if (enabledSettings.length == 4) {
+            console.log("All - Checked");
+            myChart.data.datasets[0].data = [0, 0, 0, 1, 0, 0]; //PUT TABLE VALUES HERE?
+            myChart.update();
+        }
 
-bmi.addEventListener('change', function() {
-  if (this.checked) {
-      console.log("BMI - Checked");
-      console.log(bmi.value.split(","));
-      myChart.data.datasets[0].data = bmi.value.split(",");
-      myChart.update();
-  } else {
-      console.log("BMI - Unchecked");
-      myChart.data.datasets[0].data = [null, null, null, null, null];
-      myChart.update();
-  }
-});
+        // 3 OPTIONS
+        else if (enabledSettings[0] == "bmiC" && enabledSettings[1] == "smokingstatusC" && enabledSettings[2] == "strokeC") {
+            console.log("BMI, Smoking Status, Stroke - Checked");
+            myChart.data.datasets[0].data = [0, 0, 4, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            myChart.update();
+        }
+        else if (enabledSettings[0] == "sexC" && enabledSettings[1] == "smokingstatusC" && enabledSettings[2] == "strokeC") {
+            console.log("Sex, Smoking Status, Stroke - Checked");
+            myChart.data.datasets[0].data = [0, 0, 3, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            myChart.update();
+        }
+        else if (enabledSettings[0] == "sexC" && enabledSettings[1] == "bmiC" && enabledSettings[2] == "strokeC") {
+            console.log("Sex, BMI, Stroke - Checked");
+            myChart.data.datasets[0].data = [0, 0, 2, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            myChart.update();
+        }
+        else if (enabledSettings[0] == "sexC" && enabledSettings[1] == "bmiC" && enabledSettings[2] == "smokingstatusC") {
+            console.log("Sex, BMI, Smoking Status - Checked");
+            myChart.data.datasets[0].data = [0, 0, 1, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            myChart.update();
+        }
 
-smokingstatus.addEventListener('change', function() {
-  if (this.checked) {
-      console.log("Smoking Status - Checked");
-      console.log(smokingstatus.value.split(","));
-      myChart.data.datasets[0].data = smokingstatus.value.split(",");
-      myChart.update();
-  } else {
-      console.log("Smoking Status - Unchecked");
-      myChart.data.datasets[0].data = [null, null, null, null, null];
-      myChart.update();
-  }
-});
-
-stroke.addEventListener('change', function() {
-  if (this.checked) {
-      console.log("Stroke - Checked");
-      console.log(stroke.value.split(","));
-      myChart.data.datasets[0].data = stroke.value.split(",");
-      myChart.update();
-  } else {
-      console.log("Stroke - Unchecked");
-      myChart.data.datasets[0].data = [null, null, null, null, null];
-      myChart.update();
-  }
+        // 2 OPTIONS
+        else if (enabledSettings[0] == "smokingstatusC" && enabledSettings[1] == "strokeC") {
+            console.log("Smoking Status, Stroke - Checked");
+            myChart.data.datasets[0].data = [0, 6, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            myChart.update();
+        }
+        else if (enabledSettings[0] == "bmiC" && enabledSettings[1] == "strokeC") {
+            console.log("BMI, Stroke - Checked");
+            myChart.data.datasets[0].data = [0, 5, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            myChart.update();
+        }
+        else if (enabledSettings[0] == "bmiC" && enabledSettings[1] == "smokingstatusC") {
+            console.log("BMI, Smoking Status - Checked");
+            myChart.data.datasets[0].data = [0, 4, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            myChart.update();
+        }
+        else if (enabledSettings[0] == "sexC" && enabledSettings[1] == "strokeC" ) {
+            console.log("Sex, Stroke - Checked");
+            myChart.data.datasets[0].data = [0, 3, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            myChart.update();
+        }
+        else if (enabledSettings[0] == "sexC" && enabledSettings[1] == "smokingstatusC") {
+            console.log("Sex, Smoking Status - Checked");
+            myChart.data.datasets[0].data = [0, 2, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            myChart.update();
+        }
+        else if (enabledSettings[0] == "sexC" && enabledSettings[1] == "bmiC") {
+            console.log("Sex, BMI - Checked");
+            myChart.data.datasets[0].data = [0, 1, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            myChart.update();
+        }
+        
+        // 1 OPTION
+        else if (enabledSettings[0] == "strokeC") {
+            console.log("Stroke - Checked");
+            myChart.data.datasets[0].data = [4, 0, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            myChart.update();
+        }
+        else if (enabledSettings[0] == "smokingstatusC") {
+            console.log("Smoking Status - Checked");
+            myChart.data.datasets[0].data = [3, 0, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            myChart.update();
+        }
+        else if (enabledSettings[0] == "bmiC") {
+            console.log("BMI - Checked");
+            myChart.data.datasets[0].data = [2, 0, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            myChart.update();
+        }
+        else if (enabledSettings[0] == "sexC") {
+            console.log("Sex - Checked");
+            myChart.data.datasets[0].data = [1, 0, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            myChart.update();
+        }
+        else {
+            console.log("All - Unchecked");
+            myChart.data.datasets[0].data = [null, null, null, null, null];
+            myChart.update();
+        }
+    })
 });
