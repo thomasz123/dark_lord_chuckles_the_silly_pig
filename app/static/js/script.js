@@ -1,10 +1,10 @@
-const ctx = document.getElementById('myChart').getContext('2d');
+const ctx = document.getElementById('strokeChart').getContext('2d');
 
 const data = {
     labels: [0, 1, 2, 3, 4, 5],
         datasets: [{
-            label: 'Heart Disease',
-            data: [null, null, null, null, null],
+            label: 'Stroke',
+            data: [null, null, null, null, null, null],
             fill: false,
             borderColor: 'rgb(75, 192, 192)',
             tension: 0.1
@@ -13,26 +13,36 @@ const data = {
 
 const config = {
     scales: {
-      xAxes: [{
-          scaleLabel: {
-            display: true,
-            labelString: 'Age',
-            font: {
-              size: 24,
-              weight: 'bold' // NOT WORKING
+        xAxes: [{
+            ticks: {
+                stepSize: 1,
+                min: 0,
+                max: 100
+            },
+            scaleLabel: {
+                display: true,
+                labelString: 'Age',
+                font: {
+                    size: 24,
+                    weight: 'bold' // NOT WORKING
+                }
+            },
+        }],
+        yAxes: [{
+            ticks: {
+                stepSize: 1,
+                min: 0,
+                max: 100
+            },
+            scaleLabel: {
+                display: true,
+                labelString: 'Likelihood of Heart Disease (%)'
             }
-          },
-      }],
-      yAxes: [{
-          scaleLabel: {
-            display: true,
-            labelString: 'Likelihood of Heart Disease (%)'
-          }
-      }]
+        }]
     }
 };
 
-const myChart = new Chart(ctx, {
+const strokeChart = new Chart(ctx, {
     type: 'line',
     data: data,
     options: config
@@ -42,11 +52,11 @@ var checkboxes = document.querySelectorAll("input[type=checkbox][name=settings]"
 console.log(checkboxes);
 let enabledSettings = [];
 
-const sex = document.getElementById("sexC");
+const sex = document.getElementById("sex1");
 const heartdisease = document.getElementById("heartdiseaseC");
-const bmi = document.getElementById("bmiC");
-const smokingstatus = document.getElementById("smokingstatusC");
-const stroke = document.getElementById("strokeC");
+const bmi = document.getElementById("bmi1");
+const smokingstatus = document.getElementById("smokingstatus1");
+const stroke = document.getElementById("heartdisease1");
 
 checkboxes.forEach(function(checkbox) {
     checkbox.addEventListener('change', function() {
@@ -60,89 +70,101 @@ checkboxes.forEach(function(checkbox) {
         // 4 (ALL) OPTIONS
         if (enabledSettings.length == 4) {
             console.log("All - Checked");
-            myChart.data.datasets[0].data = [0, 0, 0, 1, 0, 0]; //PUT TABLE VALUES HERE?
-            myChart.update();
+            strokeChart.data.datasets[0].data = [0, 0, 0, 1, 0, 0]; //PUT TABLE VALUES HERE?
+            strokeChart.update();
         }
 
         // 3 OPTIONS
-        else if (enabledSettings[0] == "bmiC" && enabledSettings[1] == "smokingstatusC" && enabledSettings[2] == "strokeC") {
-            console.log("BMI, Smoking Status, Stroke - Checked");
-            myChart.data.datasets[0].data = [0, 0, 4, 0, 0, 0]; //PUT TABLE VALUES HERE?
-            myChart.update();
+        else if (enabledSettings[0] == "bmi1" && enabledSettings[1] == "smokingstatus1" && enabledSettings[2] == "heartdisease1") {
+            console.log("BMI, Smoking Status, Heart Disease - Checked");
+            strokeChart.data.datasets[0].data = [0, 0, 4, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            strokeChart.update();
         }
-        else if (enabledSettings[0] == "sexC" && enabledSettings[1] == "smokingstatusC" && enabledSettings[2] == "strokeC") {
-            console.log("Sex, Smoking Status, Stroke - Checked");
-            myChart.data.datasets[0].data = [0, 0, 3, 0, 0, 0]; //PUT TABLE VALUES HERE?
-            myChart.update();
+        else if (enabledSettings[0] == "sex1" && enabledSettings[1] == "smokingstatus1" && enabledSettings[2] == "heartdisease1") {
+            console.log("Sex, Smoking Status, Heart Disease - Checked");
+            strokeChart.data.datasets[0].data = [0, 0, 3, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            strokeChart.update();
         }
-        else if (enabledSettings[0] == "sexC" && enabledSettings[1] == "bmiC" && enabledSettings[2] == "strokeC") {
-            console.log("Sex, BMI, Stroke - Checked");
-            myChart.data.datasets[0].data = [0, 0, 2, 0, 0, 0]; //PUT TABLE VALUES HERE?
-            myChart.update();
+        else if (enabledSettings[0] == "sex1" && enabledSettings[1] == "bmi1" && enabledSettings[2] == "heartdisease1") {
+            console.log("Sex, BMI, Heart Disease - Checked");
+            strokeChart.data.datasets[0].data = [0, 0, 2, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            strokeChart.update();
         }
-        else if (enabledSettings[0] == "sexC" && enabledSettings[1] == "bmiC" && enabledSettings[2] == "smokingstatusC") {
+        else if (enabledSettings[0] == "sex1" && enabledSettings[1] == "bmi1" && enabledSettings[2] == "smokingstatus1") {
             console.log("Sex, BMI, Smoking Status - Checked");
-            myChart.data.datasets[0].data = [0, 0, 1, 0, 0, 0]; //PUT TABLE VALUES HERE?
-            myChart.update();
+            strokeChart.data.datasets[0].data = [0, 0, 1, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            strokeChart.update();
         }
 
         // 2 OPTIONS
-        else if (enabledSettings[0] == "smokingstatusC" && enabledSettings[1] == "strokeC") {
-            console.log("Smoking Status, Stroke - Checked");
-            myChart.data.datasets[0].data = [0, 6, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
-            myChart.update();
+        else if (enabledSettings[0] == "smokingstatus1" && enabledSettings[1] == "heartdisease1") {
+            console.log("Smoking Status, Heart Disease - Checked");
+            strokeChart.data.datasets[0].data = [0, 6, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            strokeChart.update();
         }
-        else if (enabledSettings[0] == "bmiC" && enabledSettings[1] == "strokeC") {
-            console.log("BMI, Stroke - Checked");
-            myChart.data.datasets[0].data = [0, 5, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
-            myChart.update();
+        else if (enabledSettings[0] == "bmi1" && enabledSettings[1] == "heartdisease1") {
+            console.log("BMI, Heart Disease - Checked");
+            strokeChart.data.datasets[0].data = [0, 5, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            strokeChart.update();
         }
-        else if (enabledSettings[0] == "bmiC" && enabledSettings[1] == "smokingstatusC") {
+        else if (enabledSettings[0] == "bmi1" && enabledSettings[1] == "smokingstatus1") {
             console.log("BMI, Smoking Status - Checked");
-            myChart.data.datasets[0].data = [0, 4, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
-            myChart.update();
+            strokeChart.data.datasets[0].data = [0, 4, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            strokeChart.update();
         }
-        else if (enabledSettings[0] == "sexC" && enabledSettings[1] == "strokeC" ) {
-            console.log("Sex, Stroke - Checked");
-            myChart.data.datasets[0].data = [0, 3, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
-            myChart.update();
+        else if (enabledSettings[0] == "sex1" && enabledSettings[1] == "heartdisease1" ) {
+            console.log("Sex, Heart Disease - Checked");
+            strokeChart.data.datasets[0].data = [0, 3, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            strokeChart.update();
         }
-        else if (enabledSettings[0] == "sexC" && enabledSettings[1] == "smokingstatusC") {
+        else if (enabledSettings[0] == "sex1" && enabledSettings[1] == "smokingstatus1") {
             console.log("Sex, Smoking Status - Checked");
-            myChart.data.datasets[0].data = [0, 2, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
-            myChart.update();
+            strokeChart.data.datasets[0].data = [0, 2, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            strokeChart.update();
         }
-        else if (enabledSettings[0] == "sexC" && enabledSettings[1] == "bmiC") {
+        else if (enabledSettings[0] == "sex1" && enabledSettings[1] == "bmi1") {
             console.log("Sex, BMI - Checked");
-            myChart.data.datasets[0].data = [0, 1, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
-            myChart.update();
+            strokeChart.data.datasets[0].data = [0, 1, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            strokeChart.update();
         }
         
         // 1 OPTION
-        else if (enabledSettings[0] == "strokeC") {
-            console.log("Stroke - Checked");
-            myChart.data.datasets[0].data = [4, 0, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
-            myChart.update();
+        else if (enabledSettings[0] == "heartdisease1") {
+            console.log("Heart Disease - Checked");
+            strokeChart.data.datasets[0].data = [4, 0, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            strokeChart.update();
         }
-        else if (enabledSettings[0] == "smokingstatusC") {
+        else if (enabledSettings[0] == "smokingstatus1") {
             console.log("Smoking Status - Checked");
-            myChart.data.datasets[0].data = [3, 0, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
-            myChart.update();
+            strokeChart.data.datasets[0].data = [3, 0, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            strokeChart.update();
         }
-        else if (enabledSettings[0] == "bmiC") {
+        else if (enabledSettings[0] == "bmi1") {
             console.log("BMI - Checked");
-            myChart.data.datasets[0].data = [2, 0, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
-            myChart.update();
+            strokeChart.data.datasets[0].data = [2, 0, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            strokeChart.update();
         }
-        else if (enabledSettings[0] == "sexC") {
+        else if (enabledSettings[0] == "sex1") {
             console.log("Sex - Checked");
-            myChart.data.datasets[0].data = [1, 0, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
-            myChart.update();
+            strokeChart.data.datasets[0].data = [1, 0, 0, 0, 0, 0]; //PUT TABLE VALUES HERE?
+            strokeChart.update();
         }
         else {
             console.log("All - Unchecked");
-            myChart.data.datasets[0].data = [null, null, null, null, null];
-            myChart.update();
+            strokeChart.data.datasets[0].data = [null, null, null, null, null, null];
+            strokeChart.update();
         }
     })
+});
+
+var db = openDatabase('heart', '1.0', 'my first database', 5000*7);
+console.log(db);
+db.transaction(function (tx) {
+    tx.executeSql('CREATE TABLE IF NOT EXISTS heart (id INTEGER, gender TEXT, age INTEGER, disease INTEGER, bmi INTEGER, status TEXT, stroke INTEGER)');
+    tx.executeSql('SELECT * FROM heart', [], function (tx, results) {
+        var len = results.rows.length, i;
+        for (i = 0; i < len; i++) {
+            alert(results.rows.item(i).text);
+        }
+        });
 });
