@@ -157,14 +157,43 @@ checkboxes.forEach(function(checkbox) {
     })
 });
 
-var db = openDatabase('heart', '1.0', 'my first database', 5000*7);
+var db = openDatabase('heart.db', '1.0', 'my first database', 5000*7);
 console.log(db);
 db.transaction(function (tx) {
     tx.executeSql('CREATE TABLE IF NOT EXISTS heart (id INTEGER, gender TEXT, age INTEGER, disease INTEGER, bmi INTEGER, status TEXT, stroke INTEGER)');
+    // tx.executeSql('SELECT * FROM heart', [], function (tx, results) {
+    //     var len = results.rows.length, i;
+    //     for (i = 0; i < len; i++) {
+    //         console.log(results.rows.item(i).text);
+    //     }
+    //     });
+});
+
+db.transaction(function (tx) { 
     tx.executeSql('SELECT * FROM heart', [], function (tx, results) {
         var len = results.rows.length, i;
         for (i = 0; i < len; i++) {
-            alert(results.rows.item(i).text);
+            console.log(results.rows.item(i).text);
         }
         });
-});
+    // tx.executeSql('SELECT * FROM LOGS', [], function (tx, results) { 
+    //    var len = results.rows.length, i; 
+    //    msg = "<p>Found rows: " + len + "</p>"; 
+    //    document.querySelector('#status').innerHTML +=  msg; 
+   
+    //    for (i = 0; i < len; i++) { 
+    //       console.log(results.rows.item(i).log ); 
+    //    } 
+   
+    // }, null); 
+ });
+
+// //write me a function that will display all elements in my databse in the console
+// db.transaction(function (tx) {
+//     tx.executeSql('SELECT * FROM heart', [], function (tx, results) {
+//         var len = results.rows.length, i;
+//         for (i = 0; i < len; i++) {
+//             console.log(results.rows.item(i));
+//         }
+//         });
+// }
