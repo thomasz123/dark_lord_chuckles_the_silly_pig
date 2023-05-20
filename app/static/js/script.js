@@ -29,11 +29,11 @@ const config = {
             },
         }],
         yAxes: [{
-            ticks: {
-                stepSize: 1,
-                min: 0,
-                max: 100
-            },
+            // ticks: {
+            //     stepSize: 1,
+            //     min: 0,
+            //     max: 100
+            // },
             scaleLabel: {
                 display: true,
                 labelString: 'Likelihood of Heart Disease (%)'
@@ -52,24 +52,38 @@ var checkboxes = document.querySelectorAll("input[type=checkbox][name=settings]"
 console.log(checkboxes);
 let enabledSettings = [];
 
-const sex = document.getElementById("sex1");
-const heartdisease = document.getElementById("heartdiseaseC");
-const bmi = document.getElementById("bmi1");
-const smokingstatus = document.getElementById("smokingstatus1");
-const stroke = document.getElementById("heartdisease1");
+// let strokeform = document.forms["strokeform"];
+// strokeform.addEventListener("strokesubmit", strokeVals);
+
+// function getVals(event){
+//     event.preventDefault();
+//     let idk = document.querySelectorAll(".stroke");
+//     let idk2 = [];
+//     for (let settings of idk){
+//         if(settings.checked == true){
+//             idk2.push(settings.value);
+//         }
+//     }
+// }
+
+// const sex = document.getElementById("sex1");
+// const heartdisease = document.getElementById("heartdiseaseC");
+// const bmi = document.getElementById("bmi1");
+// const smokingstatus = document.getElementById("smokingstatus1");
+// const stroke = document.getElementById("heartdisease1");
 
 checkboxes.forEach(function(checkbox) {
     checkbox.addEventListener('change', function() {
         enabledSettings = 
-            Array.from(checkboxes) // Convert checkboxes to an array to use filter and map.
-            .filter(i => i.checked) // Use Array.filter to remove unchecked checkboxes.
-            .map(i => i.value) // Use Array.map to extract only the checkbox values from the array of objects.
+            Array.from(checkboxes)
+            .filter(i => i.checked)
+            .map(i => i.value)
             
         console.log(enabledSettings)
 
         // 4 (ALL) OPTIONS
-        if (enabledSettings.length == 4) {
-            console.log("All - Checked");
+        if (enabledSettings[0] == "sex1" && enabledSettings[1] == "bmi1" && enabledSettings[2] == "smokingstatus1" && enabledSettings[3] == "heartdisease1") {
+            console.log("All Stroke - Checked");
             strokeChart.data.datasets[0].data = [0, 0, 0, 1, 0, 0]; //PUT TABLE VALUES HERE?
             strokeChart.update();
         }

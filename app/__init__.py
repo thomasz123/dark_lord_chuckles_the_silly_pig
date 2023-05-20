@@ -141,7 +141,7 @@ def questionVals():
         db2.commit()
         
         return redirect(url_for('results'))
-    render_template('results.html')
+    return render_template('results.html')
 
 
 @app.route("/results")
