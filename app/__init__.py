@@ -112,6 +112,25 @@ def questions():
     return render_template('questionnaire.html')
 
 
+@app.route("/test", methods = ['GET', 'POST'])
+def test():
+    print(request.method)
+    if request.method == 'POST':
+        if request.form.get('sex1'):
+            _sex = request.form['sex1']
+            print(_sex)
+        if request.form.get('bmi1'):
+            _bmi = request.form['bmi1']
+            print(_bmi)
+        if request.form.get('smokingstatus1'):
+            _smokingstatus = request.form['smokingstatus1']
+            print(_smokingstatus)
+        if request.form.get('heartdisease1'):
+            _heartdisease = request.form['heartdisease1']
+            print(_heartdisease)
+    return render_template('test.html')
+
+
 @app.route("/questionnaire", methods = ['GET', 'POST'])
 def questionVals():
     print(request.method)
