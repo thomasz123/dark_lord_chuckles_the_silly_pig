@@ -162,7 +162,7 @@ def questionVals():
     return render_template('results.html')
 
 
-@app.route("/strokeresults")
+@app.route("/strokeresults", methods = ['GET', 'POST'])
 def results():
     DB_FILE_STROKE="stroke.db"
     db3 = sqlite3.connect(DB_FILE_STROKE)
