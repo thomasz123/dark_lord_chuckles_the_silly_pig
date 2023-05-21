@@ -9,7 +9,7 @@ DB_FILE_1 = "userinfo.db"
 db1 = sqlite3.connect(DB_FILE_1, check_same_thread=False)
 c1 = db1.cursor()
 
-DB_FILE_2 = "question.db"
+DB_FILE_2 = "stroke_question.db"
 db2 = sqlite3.connect(DB_FILE_2, check_same_thread=False)
 c2 = db2.cursor()
 
@@ -18,7 +18,7 @@ command1 = "create table IF NOT EXISTS login(user TEXT, password TEXT)"
 c1.execute(command1)
 db1.commit()
 
-command2 = "create table IF NOT EXISTS questionnaire(user TEXT, name TEXT, height INTEGER, weight INTEGER, sex INTEGER, age INTEGER, eathealthy INTEGER, allergies INTEGER, exercise INTEGER, meditation INTEGER, sleep INTEGER, checkups INTEGER, stroke INTEGER, onediabetes INTEGER, twodiabetes INTEGER, alcohol INTEGER, drugs INTEGER, disorders INTEGER, feelhealthy INTEGER);"
+command2 = "create table IF NOT EXISTS stroke_question(user TEXT, name TEXT, height INTEGER, weight INTEGER, sex INTEGER, age INTEGER, heart INTEGER);"
 c2.execute(command2)
 db2.commit()
 
@@ -26,15 +26,14 @@ db2.commit()
 app = Flask(__name__)
 app.secret_key = 'a\8$x5T!H2P7f\m/rwd[&'
 
-#heart
 #replace file paths with your own
 data = pd.read_csv('data/archive/healthcare-dataset-stroke-data.csv')
 
 #drop irrelevent columns
 data=data.drop(columns=['hypertension','ever_married', 'work_type', 'Residence_type', 'avg_glucose_level'])
 
-
-#plot male and female lines showing correlation between age and 
+#write modified csv into a file
+data.to_csv("stroke.csv", index=False)
 
 
 #tables.setup()
@@ -107,9 +106,9 @@ def logout():
     return redirect(url_for('index'))
 
 
-@app.route("/questions")
+@app.route("/strokequestions")
 def questions():
-    return render_template('questionnaire.html')
+    return render_template('stroke_question.html')
 
 
 @app.route("/test", methods = ['GET', 'POST'])
@@ -131,7 +130,7 @@ def test():
     return render_template('test.html')
 
 
-@app.route("/questionnaire", methods = ['GET', 'POST'])
+@app.route("/strokequestions", methods = ['GET', 'POST'])
 def questionVals():
     print(request.method)
     if request.method == 'POST':
@@ -140,54 +139,52 @@ def questionVals():
         _weight = request.form['weight']
         _sex = request.form['sex']
         _age = request.form['age']
-        _eathealthy = request.form['eathealthy']
-        _allergies = request.form['allergies']
-        _exercise = request.form['exercise']
-        _meditation = request.form['meditation']
-        _sleep = request.form['sleep']
-        _checkups = request.form['checkups']
-        _stroke = request.form['stroke']
-        _onediabetes = request.form['onediabetes']
-        _twodiabetes = request.form['twodiabetes']
-        _alcohol = request.form['alcohol']
-        _drugs = request.form['drugs']
-        _disorders = request.form['disorders']
-        _feelhealthy = request.form['feelhealthy']
+        # _eathealthy = request.form['eathealthy']
+        # _allergies = request.form['allergies']
+        # _exercise = request.form['exercise']
+        # _meditation = request.form['meditation']
+        # _sleep = request.form['sleep']
+        # _checkups = request.form['checkups']
+        _heart = request.form['heart']
+        # _onediabetes = request.form['onediabetes']
+        # _twodiabetes = request.form['twodiabetes']
+        # _alcohol = request.form['alcohol']
+        # _drugs = request.form['drugs']
+        # _disorders = request.form['disorders']
+        # _feelhealthy = request.form['feelhealthy']
 
         #should replace values when new answers are submited
-        c2.execute("DELETE FROM questionnaire WHERE user = (?)", (session['username'],))
-        c2.execute("INSERT INTO questionnaire VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?);", (session['username'], _name, _height, _weight, _sex, _age, _eathealthy, _allergies, _exercise, _meditation, _sleep, _checkups, _stroke, _onediabetes, _twodiabetes, _alcohol, _drugs, _disorders, _feelhealthy))
+        c2.execute("DELETE FROM stroke_question WHERE user = (?)", (session['username'],))
+        c2.execute("INSERT INTO stroke_question VALUES (?,?,?,?,?,?,?);", (session['username'], _name, _height, _weight, _sex, _age, _heart))
         db2.commit()
         
-        return redirect(url_for('results'))
+        return redirect("/strokeresults")
     return render_template('results.html')
 
 
-@app.route("/results")
+@app.route("/strokeresults")
 def results():
-    DB_FILE_HEART="heart.db"
-    db3 = sqlite3.connect(DB_FILE_HEART)
+    DB_FILE_STROKE="stroke.db"
+    db3 = sqlite3.connect(DB_FILE_STROKE)
     c3 = db3.cursor()
-    c3.execute("create table if not exists heart(id INTEGER, gender TEXT, age INTEGER, disease INTEGER, bmi INTEGER, status TEXT, stroke INTEGER);")
+    c3.execute("create table if not exists stroke(id INTEGER, gender TEXT, age INTEGER, disease INTEGER, bmi INTEGER, status TEXT, stroke INTEGER);")
 
-    data.to_sql('heart',db3,if_exists='replace',index=False)
-    #write modified csv into a file
-    data.to_csv("heart_disease.csv", index=False)
-
-    table_heart = c3.execute("SELECT * FROM heart;").fetchall()
+    data.to_sql('stroke',db3,if_exists='replace',index=False)
+    
+    table_stroke = c3.execute("SELECT * FROM stroke;").fetchall()
     db3.commit()
     db3.close()
 
-    DB_FILE_QUESTION="question.db"
-    db4 = sqlite3.connect(DB_FILE_QUESTION)
+    DB_FILE_STROKE_QUESTION="stroke_question.db"
+    db4 = sqlite3.connect(DB_FILE_STROKE_QUESTION)
     c4 = db4.cursor()
-    table_question = c4.execute("SELECT name, height, weight, sex, age, eathealthy, allergies, exercise, meditation, sleep FROM questionnaire WHERE user = (?)", (session['username'],) ).fetchall()
+    table_question = c4.execute("SELECT name, height, weight, sex, age, heart FROM stroke_question WHERE user = (?)", (session['username'],) ).fetchall()
     db4.commit()
     db4.close()
 
     #TO DO: Add username as a parameter to questionnaire to display only their results
 
-    return render_template('results.html', disp=table_heart, ques=table_question)
+    return render_template('results.html', disp=table_stroke, ques=table_question)
 
 
 @app.route("/recommendations")
