@@ -108,6 +108,8 @@ def logout():
 
 @app.route("/strokequestions")
 def questions():
+    print("***********************")
+    print(request.method)
     return render_template('stroke_question.html')
 
 
@@ -133,33 +135,36 @@ def test():
 @app.route("/strokequestions", methods = ['GET', 'POST'])
 def questionVals():
     print(request.method)
-    if request.method == 'POST':
-        _name = request.form['name']
-        _height = request.form['height']
-        _weight = request.form['weight']
-        _sex = request.form['sex']
-        _age = request.form['age']
-        # _eathealthy = request.form['eathealthy']
-        # _allergies = request.form['allergies']
-        # _exercise = request.form['exercise']
-        # _meditation = request.form['meditation']
-        # _sleep = request.form['sleep']
-        # _checkups = request.form['checkups']
-        _heart = request.form['heart']
-        # _onediabetes = request.form['onediabetes']
-        # _twodiabetes = request.form['twodiabetes']
-        # _alcohol = request.form['alcohol']
-        # _drugs = request.form['drugs']
-        # _disorders = request.form['disorders']
-        # _feelhealthy = request.form['feelhealthy']
+    print("))))))))))))))))))))))))")
+   # if request.method == 'GET':
+    _name = request.form['name']
+    _height = request.form['height']
+    _weight = request.form['weight']
+    _sex = request.form['sex']
+    _age = request.form['age']
+    # _eathealthy = request.form['eathealthy']
+    # _allergies = request.form['allergies']
+    # _exercise = request.form['exercise']
+    # _meditation = request.form['meditation']
+    # _sleep = request.form['sleep']
+    # _checkups = request.form['checkups']
+    _heart = request.form['heart']
+    # _onediabetes = request.form['onediabetes']
+    # _twodiabetes = request.form['twodiabetes']
+    # _alcohol = request.form['alcohol']
+    # _drugs = request.form['drugs']
+    # _disorders = request.form['disorders']
+    # _feelhealthy = request.form['feelhealthy']
 
-        #should replace values when new answers are submited
-        c2.execute("DELETE FROM stroke_question WHERE user = (?)", (session['username'],))
-        c2.execute("INSERT INTO stroke_question VALUES (?,?,?,?,?,?,?);", (session['username'], _name, _height, _weight, _sex, _age, _heart))
-        db2.commit()
-        
-        return redirect("/strokeresults")
-    return render_template('results.html')
+    #should replace values when new answers are submited
+    c2.execute("DELETE FROM stroke_question WHERE user = (?)", (session['username'],))
+    c2.execute("INSERT INTO stroke_question VALUES (?,?,?,?,?,?,?);", (session['username'], _name, _height, _weight, _sex, _age, _heart))
+    print("test)*****************************")
+    print( c2.execute("SELECT name, height, weight, sex, age, heart FROM stroke_question WHERE user = (?)", (session['username'],) ).fetchall())
+    db2.commit()
+    
+    return redirect("/strokeresults")
+   # return render_template('stroke_question.html')
 
 
 @app.route("/strokeresults", methods = ['GET', 'POST'])
@@ -179,6 +184,7 @@ def results():
     db4 = sqlite3.connect(DB_FILE_STROKE_QUESTION)
     c4 = db4.cursor()
     table_question = c4.execute("SELECT name, height, weight, sex, age, heart FROM stroke_question WHERE user = (?)", (session['username'],) ).fetchall()
+    print(table_question)
     db4.commit()
     db4.close()
 
