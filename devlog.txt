@@ -128,3 +128,8 @@ dianaA - 2023-05-17 15:13
 --------------------------------------------------------------
 * Made a test line chart that changes values depending on which boxes are checked using Chart.js.
 ==============================================================
+
+laurenL - 2023-05-21 13:13
+--------------------------------------------------------------
+* based on user input on chart, produce values that can be used in the chart
+==============================================================
