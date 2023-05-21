@@ -11,12 +11,12 @@ data=data.drop(columns=['Patient Id', 'Dust Allergy', 'OccuPational Hazards', 'G
 DB_FILE="lung.db"
 db = sqlite3.connect(DB_FILE)
 c = db.cursor()
-c.execute("CREATE TABLE if not exists lung(index INTEGER, age INTEGER, gender INTEGER, airpollution INTEGER, alcoholuse INTEGER, smoking INTEGER, level TEXT);")
+c.execute("CREATE TABLE if not exists lung(id INTEGER, age INTEGER, gender INTEGER, airpollution INTEGER, alcoholuse INTEGER, smoking INTEGER, level TEXT);")
 data.to_sql('lung',db,if_exists='replace',index=False)
 #write modified csv into a file
 data.to_csv("lung_cancer.csv", index=False)
 
-table = c.execute("SELECT * FROM heart;").fetchall()
+table = c.execute("SELECT * FROM lung;").fetchall()
 print(table)
 db.commit()
 db.close()
