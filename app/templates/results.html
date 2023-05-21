@@ -61,6 +61,7 @@
                             <th>Sex</th>
                             <th>Age</th>
                             <th>Heart Disease</th>
+                            <th>Smoking Status</th>
                             <th>BMI</th>
                         </tr>
                         {% for item in ques %} 
@@ -68,6 +69,7 @@
                                 {% for x in item %} 
                                     <td>{{ x }}</td> 
                                 {% endfor %}
+                                    <td>{{ bmi }}</td>
                             </tr>
                         {% endfor %}
                     </thead>

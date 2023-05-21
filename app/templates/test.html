@@ -53,10 +53,10 @@
             <br>
 
             <form action="/test" method="POST">
-                <label><input type="checkbox" name="sex1" value="sex1">Sex</label>
-                <label><input type="checkbox" name="bmi1" value="bmi1">BMI</label>
-                <label><input type="checkbox" name="smokingstatus1" value="smokingstatus1">Smoking Status</label>
-                <label><input type="checkbox" name="heartdisease1" value="heartdisease1">Heart Disease</label>
+                <label><input type="checkbox" name="sex1" value="True">Sex</label>
+                <label><input type="checkbox" name="bmi1" value="True">BMI</label>
+                <label><input type="checkbox" name="smokingstatus1" value="True">Smoking Status</label>
+                <label><input type="checkbox" name="heartdisease1" value="True">Heart Disease</label>
                 <input type="submit" name="submit" value="Submit">
             </form>
 
@@ -79,6 +79,9 @@
             </div>
 
             <br>
+            {{overall}}
+            <br>
+            {{all}}
         </center>
 
         <script src="../static/js/script.js" type="text/javascript"></script>
