@@ -243,7 +243,6 @@ def test():
     else:
         overall="Your overall probability of getting a stroke is " + str(round((100*len(stroke_df_yes)/len(stroke_df)),2)) + "%"
 
-
     stroke_df=stroke_df.sort_values(by=['age'])
     stroke_df=stroke_df.loc[stroke_df["age"] >= 1]
     print(stroke_df)
