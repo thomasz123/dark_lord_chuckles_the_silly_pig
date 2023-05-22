@@ -14,7 +14,7 @@
   <body>
     <div class="header">
         <h1 style="margin-left: 30px; margin-right: 30px;">
-            Dark Lord Chuckles the Silly Pig's Diet and Exercise Recommendations
+            Dark Lord Chuckles the Silly Pig's Health and Diet Recommendations
         </h1>
 
         <h5 style="margin-left: 30px; margin-right: 30px;">
@@ -42,9 +42,6 @@
                     <li class="nav-item">
                         <a class="nav-link" href="{{ url_for('recommendations') }}">Recommendations</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ url_for('test') }}">Test</a>
-                    </li>
                 </ul>
             </div>
         </nav>
@@ -53,40 +50,20 @@
     <div class="homepage">
 
         <center>
-            <h1>Search For Food</h1>
+            <h1>Welcome!</h1>
             <br>
-            <div class="search-container">
-                <form action="/search" method="POST">
-                  <input type="text" placeholder="Search.." name="search">
-                  <button type="submit">Submit</button>
-                </form>
-            </div>
+            <h5 style="font-weight:400;">Have you ever been curious about how likely you are to get a certain disease?</h5>
+            <br>
+            <h5 style="font-weight:400;">Have you ever wanted a bunch of food recipes right at your fingertips?</h5>
+            <br>
+            <h5 style="font-weight:400;">Well, you find can the answers to both questions here!</h5>
             <br><br>
-
-            <div class="container">
-                <div class="row">
-                <!-- food card -->
-                    <div class="col">
-                        {% for item in food %} 
-                        <div class="card" style="width: 30%; display:inline-block;">
-                            <img class="card-img-top" src="{{item[6]}}" alt="Card Image">
-                            <div class="card-body">
-                                <h5 class="card-title">{{item[1]}}</h5> <hr>
-                                <!-- text -->
-                                <p class="card-text">Calories: {{item[2]}} calories</p>
-                                <p class="card-text">Meal Type: {{item[3]}}</p>
-                                <p class="card-text">Cuisine Type: {{item[4]}}</p>
-                                <a href="{{item[5]}}" class="btn btn-primary">Recipe</a>
-                            </div>
-                        </div>
-                        {% endfor %}
-                    </div>
-                </div>
-            </div>
+            <i><p>Starring: Dark Lord Chuckles the Silly Pig</p></i>
+            <img src="https://static.wikia.nocookie.net/disney/images/8/81/Dave_the_Barbarian_1x15_A_Pig%27s_Story_P2_97300.jpg" style="width:480px;height:410px;" alt="Dark Lord Chuckles The Silly Pig">
             
         </center>
 
-        <br><br><br>
+        <br><br>
 
         <!-- logout button -->
         <form action="/logout">

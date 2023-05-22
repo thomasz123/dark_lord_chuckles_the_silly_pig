@@ -43,6 +43,40 @@
 
     <div class="homepage">
 
+        <center>
+            <h1>Search For Food</h1>
+            <br>
+            <div class="search-container">
+                <form action="/search" method="POST">
+                  <input type="text" placeholder="begin typing..." name="search">
+                  <input type="submit" name="submit" value="Submit">
+                </form>
+            </div>
+            <br><br>
+
+            <div class="container">
+                <div class="row">
+                <!-- food card -->
+                    <div class="col">
+                        {% for item in food %} 
+                        <div class="card" style="width: 30%; display:inline-block;">
+                            <img class="card-img-top" src="{{item[6]}}" alt="Card Image">
+                            <div class="card-body">
+                                <h5 class="card-title">{{item[1]}}</h5> <hr>
+                                <!-- text -->
+                                <p class="card-text">Calories: {{item[2]}} calories</p>
+                                <p class="card-text">Meal Type: {{item[3]}}</p>
+                                <p class="card-text">Cuisine Type: {{item[4]}}</p>
+                                <a href="{{item[5]}}" class="btn btn-primary" target=”_blank”>Recipe</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+        </center>
+
         <br><br>
 
         <!-- logout button -->

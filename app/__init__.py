@@ -3,25 +3,6 @@ import sqlite3
 import pandas as pd
 import requests
 from flask import Flask, redirect, render_template, request, session, url_for
-#import utl.tables as tables
-
-def recipe_search(ingredient):
-    app_id = ''
-    app_key = ''
-    try:
-        with open("keys/key_api0", "r") as f:
-            app_id = f.read()
-    except:
-        print("NO ID")
-    
-    try:
-        with open("keys/key_api1", "r") as f:
-            app_key = f.read()
-    except:
-        print("NO KEY")
-    result = requests.get('https://api.edamam.com/search?q={}&app_id={}&app_key={}'.format(ingredient,app_id,app_key))
-    data = result.json()
-    return data['hits']
 
 # sqlite
 DB_FILE_1 = "userinfo.db"
@@ -45,19 +26,38 @@ db2.commit()
 app = Flask(__name__)
 app.secret_key = 'a\8$x5T!H2P7f\m/rwd[&'
 
-#replace file paths with your own
+# replace file paths with your own
 data = pd.read_csv('data/archive/healthcare-dataset-stroke-data.csv')
 
-#drop irrelevent columns
+# drop irrelevent columns
 data=data.drop(columns=['hypertension','ever_married', 'work_type', 'Residence_type', 'avg_glucose_level'])
 
-#write modified csv into a file
+# write modified csv into a file
 data.to_csv("stroke.csv", index=False)
 
+# edamam recipe api
+def recipe_search(ingredient):
+    app_id = ''
+    app_key = ''
 
-#tables.setup()
+    try:
+        with open("keys/key_api0", "r") as f:
+            app_id = f.read()
+    except:
+        print("NO ID")
+    
+    try:
+        with open("keys/key_api1", "r") as f:
+            app_key = f.read()
+    except:
+        print("NO KEY")
+
+    result = requests.get('https://api.edamam.com/search?q={}&app_id={}&app_key={}'.format(ingredient,app_id,app_key))
+    data = result.json()
+    return data['hits']
 
 
+# --- LOGIN ------------------------------------------------------------------------------------------------------
 @app.route("/")
 def index():
     # if there is a session in place, divert the user to the main page
@@ -67,44 +67,10 @@ def index():
         return render_template('login.html', login="Not logged in!")
 
 
-# ACCOUNT INFO CHECK
-@app.route('/home', methods=['GET', 'POST'])
-def authenticate():
-    # results = recipe_search("chicken")
-    # for result in results:
-    #         recipe = result['recipe']
-    #         print(round(int(recipe['calories'])))
-    #         print(recipe['label'])
-    #         print(recipe['cuisineType'])
-    #         print(recipe['mealType'])
-    #         print(recipe['url'])
-    #         print("-" * 100)
-    
-    if request.method == 'POST':
-        username = request.form['username']
-        password = request.form['password']
-
-        c1.execute("SELECT password FROM login WHERE user = (?);", (username,))
-
-        try:
-            x = c1.fetchall()[0][0]
-            if x != password:
-                return render_template('login.html', login="Invalid Password!")
-            session['username'] = username
-        except:
-            return render_template('login.html', login="Submitted username is not registered!")
-    if 'username' not in session:
-        return redirect("/")
-    
-    return render_template('home.html', status="Successfully logged in!")
-
-
-
-
-# LOGGING IN SYSTEM
 @app.route("/register")
 def register():
     return render_template('register.html', status="Register here!")
+
 
 @app.route("/signup", methods=['GET', 'POST'])
 def signup():
@@ -126,7 +92,6 @@ def signup():
 
     c1.execute("INSERT INTO login VALUES (?,?);", (newUser, newPass))
     db1.commit()
-    
     return render_template('login.html', login="New user has been created successfully! Log in with your new credentials!")
 
 
@@ -136,6 +101,29 @@ def logout():
     return redirect(url_for('index'))
 
 
+# --- HOME ------------------------------------------------------------------------------------------------------
+@app.route('/home', methods=['GET', 'POST'])
+def authenticate():
+    if request.method == 'POST':
+        username = request.form['username']
+        password = request.form['password']
+
+        c1.execute("SELECT password FROM login WHERE user = (?);", (username,))
+
+        try:
+            x = c1.fetchall()[0][0]
+            if x != password:
+                return render_template('login.html', login="Invalid Password!")
+            session['username'] = username
+        except:
+            return render_template('login.html', login="Submitted username is not registered!")
+
+    if 'username' not in session:
+        return redirect("/")
+    return render_template('home.html', status="Successfully logged in!")
+
+
+# --- QUESTIONNAIRE ------------------------------------------------------------------------------------------------
 @app.route("/strokequestions")
 def questions():
     print("***********************")
@@ -143,12 +131,46 @@ def questions():
     return render_template('stroke_question.html')
 
 
-@app.route("/test")
+@app.route("/strokequestions", methods = ['GET', 'POST'])
+def questionVals():
+    print(request.method)
+    print("))))))))))))))))))))))))")
+    _name = request.form['name']
+    _height = request.form['height']
+    _weight = request.form['weight']
+    _sex = request.form['sex']
+    _age = request.form['age']
+    _heart = request.form['heart']
+    _smoke = request.form['smoke']
+    # _eathealthy = request.form['eathealthy']
+    # _allergies = request.form['allergies']
+    # _exercise = request.form['exercise']
+    # _meditation = request.form['meditation']
+    # _sleep = request.form['sleep']
+    # _checkups = request.form['checkups']
+    # _twodiabetes = request.form['twodiabetes']
+    # _alcohol = request.form['alcohol']
+    # _drugs = request.form['drugs']
+    # _disorders = request.form['disorders']
+    # _feelhealthy = request.form['feelhealthy']
+
+    # replaces values when new answers are submited
+    c2.execute("DELETE FROM stroke_question WHERE user = (?)", (session['username'],))
+    c2.execute("INSERT INTO stroke_question VALUES (?,?,?,?,?,?,?,?);", (session['username'], _name, _height, _weight, _sex, _age, _heart,_smoke))
+    print("test)*****************************")
+    print( c2.execute("SELECT name, height, weight, sex, age, heart, smokes FROM stroke_question WHERE user = (?)", (session['username'],) ).fetchall())
+    
+    db2.commit()
+    return redirect("/strokeresults")
+
+
+# --- RESULTS ------------------------------------------------------------------------------------------------------
+@app.route("/results")
 def test_questions():
-    return render_template('test.html')
+    return render_template('results.html')
 
 
-@app.route("/test", methods = ['GET', 'POST'])
+@app.route("/results", methods = ['GET', 'POST'])
 def test():
     sex=None
     bmi=None
@@ -217,9 +239,9 @@ def test():
 
     stroke_df_yes = stroke_df.loc[stroke_df['stroke'] == 1]
     if len(stroke_df) == 0:
-        overall = "your overall probability of getting a stroke is " +  "0%"
+        overall = "Your overall probability of getting a stroke is " + "0%"
     else:
-        overall="your overall probability of getting a stroke is " + str(round((100*len(stroke_df_yes)/len(stroke_df)),2)) + "%"
+        overall="Your overall probability of getting a stroke is " + str(round((100*len(stroke_df_yes)/len(stroke_df)),2)) + "%"
 
 
     stroke_df=stroke_df.sort_values(by=['age'])
@@ -238,42 +260,25 @@ def test():
     print(age_prob)
     x_vals = list(age_prob.keys())
     y_vals = list(age_prob.values())
-    return render_template('test.html', overall=overall, all=age_prob, x=x_vals, y=y_vals)
-
-
-@app.route("/strokequestions", methods = ['GET', 'POST'])
-def questionVals():
-    print(request.method)
-    print("))))))))))))))))))))))))")
-   # if request.method == 'GET':
-    _name = request.form['name']
-    _height = request.form['height']
-    _weight = request.form['weight']
-    _sex = request.form['sex']
-    _age = request.form['age']
-    # _eathealthy = request.form['eathealthy']
-    # _allergies = request.form['allergies']
-    # _exercise = request.form['exercise']
-    # _meditation = request.form['meditation']
-    # _sleep = request.form['sleep']
-    # _checkups = request.form['checkups']
-    _heart = request.form['heart']
-    _smoke = request.form['smoke']
-    # _twodiabetes = request.form['twodiabetes']
-    # _alcohol = request.form['alcohol']
-    # _drugs = request.form['drugs']
-    # _disorders = request.form['disorders']
-    # _feelhealthy = request.form['feelhealthy']
-
-    #should replace values when new answers are submited
-    c2.execute("DELETE FROM stroke_question WHERE user = (?)", (session['username'],))
-    c2.execute("INSERT INTO stroke_question VALUES (?,?,?,?,?,?,?,?);", (session['username'], _name, _height, _weight, _sex, _age, _heart,_smoke))
-    print("test)*****************************")
-    print( c2.execute("SELECT name, height, weight, sex, age, heart, smokes FROM stroke_question WHERE user = (?)", (session['username'],) ).fetchall())
-    db2.commit()
     
-    return redirect("/strokeresults")
-   # return render_template('stroke_question.html')
+    # COPY TO DISPLAY TABLE
+    DB_FILE_STROKE_QUESTION="stroke_question.db"
+    db4 = sqlite3.connect(DB_FILE_STROKE_QUESTION)
+    c4 = db4.cursor()
+    table_question = c4.execute("SELECT name, height, weight, sex, age, heart, smokes FROM stroke_question WHERE user = (?)", (session['username'],) ).fetchall()
+
+    print(table_question)
+
+    # bmi = weight (lb) / [height (in)]2 x 703
+    weight = c4.execute("select weight from stroke_question where user = (?)", (session['username'],)).fetchall()[0][0]
+    print(weight)
+    height = c4.execute("select height from stroke_question where user = (?)", (session['username'],)).fetchall()[0][0]
+    bmi = weight / (height * height) * 703
+    bmi = round(bmi, 2)
+
+    db4.commit()
+    db4.close()
+    return render_template('results.html', overall=overall, all=age_prob, x=x_vals, y=y_vals, ques=table_question, bmi=bmi)
 
 
 @app.route("/strokeresults", methods = ['GET', 'POST'])
@@ -295,18 +300,23 @@ def results():
     table_question = c4.execute("SELECT name, height, weight, sex, age, heart, smokes FROM stroke_question WHERE user = (?)", (session['username'],) ).fetchall()
 
     print(table_question)
-    # db4.commit()
-    # db4.close()
 
     # bmi = weight (lb) / [height (in)]2 x 703
     weight = c4.execute("select weight from stroke_question where user = (?)", (session['username'],)).fetchall()[0][0]
     print(weight)
     height = c4.execute("select height from stroke_question where user = (?)", (session['username'],)).fetchall()[0][0]
     bmi = weight / (height * height) * 703
-    #TO DO: Add username as a parameter to questionnaire to display only their results
+    bmi = round(bmi, 2)
+
     db4.commit()
     db4.close()
     return render_template('results.html', disp=table_stroke, ques=table_question, bmi=bmi)
+
+
+# --- RECOMMENDATIONS -----------------------------------------------------------------------------------------------
+@app.route("/recommendations")
+def recommendations():
+    return render_template('recommendations.html')
 
 
 @app.route('/search', methods=['GET', 'POST'])
@@ -322,6 +332,7 @@ def searchFood():
 
         searchItem = request.form['search']
         results = recipe_search(searchItem)
+
         for result in results:
             recipe = result['recipe']
             label = recipe['label']
@@ -331,20 +342,11 @@ def searchFood():
             url = recipe['url']
             image = recipe['image']
             c_food.execute("INSERT INTO food VALUES (?,?,?,?,?,?,?);", (session['username'], label, calories, mealType, cuisineType, url, image))
+        
         table_food = c_food.execute("SELECT * FROM food;").fetchall()
         db_food.commit()
         db_food.close()
-        # print(table_food)
-        print(url)
-
-    return render_template('home.html', food=table_food)
-    # return render_template('home.html', label=label, calories=calories, mealType=mealType, cuisineType=cuisineType, url=url, image=image)
-
-
-
-@app.route("/recommendations")
-def recommendations():
-    return render_template('recommendations.html')
+    return render_template('recommendations.html', food=table_food)
 
         
 if __name__ == "__main__":  # true if this file NOT imported
