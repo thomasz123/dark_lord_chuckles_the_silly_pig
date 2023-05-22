@@ -52,9 +52,9 @@
             </style>
             
             <center>
-                <!-- Results -->
+                <!-- Stroke Results -->
                 <div>
-                    <h1>Your Results</h1>
+                    <h1>Stroke Results</h1>
                     <br>
                     <table id="tblcsvdata" border="1" style="border-collapse: collapse;">
                         <thead>
@@ -80,11 +80,42 @@
                         <tbody>
                         </tbody>
                     </table>
-                    <br><br>
+                    <br><br><br>
                 </div>
 
-                <!-- Stroke Table -->
-                <h1>Stroke</h1>
+                <!-- Lung Cancer Results -->
+                <div>
+                    <h1>Lung Cancer Results</h1>
+                    <br>
+                    <table id="tblcsvdata" border="1" style="border-collapse: collapse;">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Height</th>
+                                <th>Weight</th>
+                                <th>Sex</th>
+                                <th>Age</th>
+                                <th>Alcohol</th>
+                                <th>Smoking</th>
+                                <th>BMI</th>
+                            </tr>
+                            {% for item in ques1 %} 
+                                <tr> 
+                                    {% for x in item %} 
+                                        <td>{{ x }}</td> 
+                                    {% endfor %}
+                                        <td>{{ bmi1 }}</td>
+                                </tr>
+                            {% endfor %}
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                    <br><br><br>
+                </div>
+
+                <!-- Stroke Graph -->
+                <h1>Stroke Graph</h1>
                 <br>
     
                 <form id="form1" action="/results" method="POST">
@@ -99,10 +130,10 @@
                     <canvas id="strokeChart"></canvas>
                 </div>
     
-                <br>
+                <br><br><br>
     
-                <!-- Lung Cancer Table -->
-                <!-- <h1>Lung Cancer</h1>
+                <!-- Lung Cancer Graph -->
+                <!-- <h1>Lung Cancer Graph</h1>
                 <br>
     
                 <label><input type="checkbox" name="settings" value="sex2">Sex</label>
@@ -111,7 +142,7 @@
                 <label><input type="checkbox" name="settings" value="smoking2">Smoking</label>
     
                 <div style="width:900px;height:430px">
-                    <canvas id="myChart"></canvas>
+                    <canvas id="lungCancerChart"></canvas>
                 </div> -->
     
                 <br>

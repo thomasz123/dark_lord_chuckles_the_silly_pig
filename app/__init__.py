@@ -13,6 +13,10 @@ DB_FILE_2 = "stroke_question.db"
 db2 = sqlite3.connect(DB_FILE_2, check_same_thread=False)
 c2 = db2.cursor()
 
+DB_FILE_lung = "lung_question.db"
+db_lung = sqlite3.connect(DB_FILE_lung, check_same_thread=False)
+c_lung = db_lung.cursor()
+
 # user login table
 command1 = "create table IF NOT EXISTS login(user TEXT, password TEXT)"
 c1.execute(command1)
@@ -21,6 +25,10 @@ db1.commit()
 command2 = "create table IF NOT EXISTS stroke_question(user TEXT, name TEXT, height INTEGER, weight INTEGER, sex INTEGER, age INTEGER, heart INTEGER, smokes TEXT);"
 c2.execute(command2)
 db2.commit()
+
+command_lung = "create table IF NOT EXISTS lung_question(user TEXT, name TEXT, height INTEGER, weight INTEGER, sex INTEGER, age INTEGER, alcohol INTEGER, smokes TEXT);"
+c_lung.execute(command_lung)
+db_lung.commit()
 
 # flask
 app = Flask(__name__)
@@ -142,25 +150,36 @@ def questionVals():
     _age = request.form['age']
     _heart = request.form['heart']
     _smoke = request.form['smoke']
-    # _eathealthy = request.form['eathealthy']
-    # _allergies = request.form['allergies']
-    # _exercise = request.form['exercise']
-    # _meditation = request.form['meditation']
-    # _sleep = request.form['sleep']
-    # _checkups = request.form['checkups']
-    # _twodiabetes = request.form['twodiabetes']
-    # _alcohol = request.form['alcohol']
-    # _drugs = request.form['drugs']
-    # _disorders = request.form['disorders']
-    # _feelhealthy = request.form['feelhealthy']
 
     # replaces values when new answers are submited
     c2.execute("DELETE FROM stroke_question WHERE user = (?)", (session['username'],))
-    c2.execute("INSERT INTO stroke_question VALUES (?,?,?,?,?,?,?,?);", (session['username'], _name, _height, _weight, _sex, _age, _heart,_smoke))
+    c2.execute("INSERT INTO stroke_question VALUES (?,?,?,?,?,?,?,?);", (session['username'], _name, _height, _weight, _sex, _age, _heart, _smoke))
     print("test)*****************************")
     print( c2.execute("SELECT name, height, weight, sex, age, heart, smokes FROM stroke_question WHERE user = (?)", (session['username'],) ).fetchall())
     
     db2.commit()
+    return redirect("/strokeresults")
+
+
+@app.route("/lungcancerquestions", methods = ['GET', 'POST'])
+def lungVals():
+    print(request.method)
+    print("))))))))))))))))))))))))")
+    _name = request.form['name']
+    _height = request.form['height']
+    _weight = request.form['weight']
+    _sex = request.form['sex']
+    _age = request.form['age']
+    _alcohol = request.form['alcohol']
+    _smoke = request.form['smoke']
+
+    # replaces values when new answers are submited
+    c_lung.execute("DELETE FROM lung_question WHERE user = (?)", (session['username'],))
+    c_lung.execute("INSERT INTO lung_question VALUES (?,?,?,?,?,?,?,?);", (session['username'], _name, _height, _weight, _sex, _age, _alcohol, _smoke))
+    print("test)*****************************")
+    print( c_lung.execute("SELECT name, height, weight, sex, age, alcohol, smokes FROM lung_question WHERE user = (?)", (session['username'],) ).fetchall())
+    
+    db_lung.commit()
     return redirect("/strokeresults")
 
 
@@ -297,19 +316,53 @@ def results():
     db4 = sqlite3.connect(DB_FILE_STROKE_QUESTION)
     c4 = db4.cursor()
     table_question = c4.execute("SELECT name, height, weight, sex, age, heart, smokes FROM stroke_question WHERE user = (?)", (session['username'],) ).fetchall()
-
     print(table_question)
 
-    # bmi = weight (lb) / [height (in)]2 x 703
-    weight = c4.execute("select weight from stroke_question where user = (?)", (session['username'],)).fetchall()[0][0]
-    print(weight)
-    height = c4.execute("select height from stroke_question where user = (?)", (session['username'],)).fetchall()[0][0]
-    bmi = weight / (height * height) * 703
-    bmi = round(bmi, 2)
+    bmi=None
+
+    if table_question != []:
+        # bmi = weight (lb) / [height (in)]2 x 703
+        weight = c4.execute("select weight from stroke_question where user = (?)", (session['username'],)).fetchall()[0][0]
+        print(weight)
+        height = c4.execute("select height from stroke_question where user = (?)", (session['username'],)).fetchall()[0][0]
+        bmi = weight / (height * height) * 703
+        bmi = round(bmi, 2)
 
     db4.commit()
     db4.close()
-    return render_template('results.html', disp=table_stroke, ques=table_question, bmi=bmi)
+
+
+    # COPIED
+    DB_FILE_LUNG="lung.db"
+    db_LUNG = sqlite3.connect(DB_FILE_LUNG)
+    c_LUNG = db_LUNG.cursor()
+    c_LUNG.execute("create table if not exists lung(id INTEGER, gender TEXT, age INTEGER, bmi INTEGER, alcohol INTEGER, smoke INTEGER, lung INTEGER);")
+
+    data.to_sql('lung',db_LUNG,if_exists='replace',index=False)
+    
+    table_lung = c_LUNG.execute("SELECT * FROM lung;").fetchall()
+    db_LUNG.commit()
+    db_LUNG.close()
+
+    DB_FILE_LUNG_QUESTION="lung_question.db"
+    db_LUNGQ = sqlite3.connect(DB_FILE_LUNG_QUESTION)
+    c_LUNGQ = db_LUNGQ.cursor()
+    table_question_lung = c_LUNGQ.execute("SELECT name, height, weight, sex, age, alcohol, smokes FROM lung_question WHERE user = (?)", (session['username'],) ).fetchall()
+    print(table_question_lung)
+
+    bmi_lung=None
+
+    if table_question_lung != []:
+        # bmi = weight (lb) / [height (in)]2 x 703
+        weight1 = c_LUNGQ.execute("select weight from lung_question where user = (?)", (session['username'],)).fetchall()[0][0]
+        print(weight1)
+        height1 = c_LUNGQ.execute("select height from lung_question where user = (?)", (session['username'],)).fetchall()[0][0]
+        bmi_lung = weight1 / (height1 * height1) * 703
+        bmi_lung = round(bmi_lung, 2)
+
+    db_LUNGQ.commit()
+    db_LUNGQ.close()
+    return render_template('results.html', disp=table_stroke, disp1=table_lung, ques=table_question, ques1=table_question_lung, bmi=bmi, bmi1=bmi_lung)
 
 
 # --- RECOMMENDATIONS -----------------------------------------------------------------------------------------------
