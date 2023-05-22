@@ -52,40 +52,39 @@
 
     <div class="homepage">
 
-        <!-- {{status}}
-        <br><br><br> -->
-
         <center>
-            <h1>Stroke</h1>
+            <h1>Search For Food</h1>
             <br>
-
-            <label><input type="checkbox" name="settings" value="sex1">Sex</label>
-            <label><input type="checkbox" name="settings" value="bmi1">BMI</label>
-            <label><input type="checkbox" name="settings" value="smokingstatus1">Smoking Status</label>
-            <label><input type="checkbox" name="settings" value="heartdisease1">Heart Disease</label>
-
-            <div style="width:900px;height:430px">
-                <canvas id="strokeChart"></canvas>
+            <div class="search-container">
+                <form action="/search" method="POST">
+                  <input type="text" placeholder="Search.." name="search">
+                  <button type="submit">Submit</button>
+                </form>
             </div>
+            <br><br>
 
-            <br>
-
-            <h1>Lung Cancer</h1>
-            <br>
-
-            <label><input type="checkbox" name="settings" value="sex2">Sex</label>
-            <label><input type="checkbox" name="settings" value="airpollution2">Air Pollution</label>
-            <label><input type="checkbox" name="settings" value="alcoholuse2">Alcohol Use</label>
-            <label><input type="checkbox" name="settings" value="smoking2">Smoking</label>
-
-            <div style="width:900px;height:430px">
-                <canvas id="myChart"></canvas>
+            <div class="container">
+                <div class="row">
+                <!-- food card -->
+                    <div class="col">
+                        {% for item in food %} 
+                        <div class="card" style="width: 30%; display:inline-block;">
+                            <img class="card-img-top" src="{{item[6]}}" alt="Card Image">
+                            <div class="card-body">
+                                <h5 class="card-title">{{item[1]}}</h5> <hr>
+                                <!-- text -->
+                                <p class="card-text">Calories: {{item[2]}} calories</p>
+                                <p class="card-text">Meal Type: {{item[3]}}</p>
+                                <p class="card-text">Cuisine Type: {{item[4]}}</p>
+                                <a href="{{item[5]}}" class="btn btn-primary">Recipe</a>
+                            </div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
             </div>
-
-            <br>
+            
         </center>
-
-        <script src="../static/js/script.js" type="text/javascript"></script>
 
         <br><br><br>
 

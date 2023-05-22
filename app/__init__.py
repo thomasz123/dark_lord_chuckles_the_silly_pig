@@ -1,8 +1,27 @@
 import random
 import sqlite3
 import pandas as pd
+import requests
 from flask import Flask, redirect, render_template, request, session, url_for
 #import utl.tables as tables
+
+def recipe_search(ingredient):
+    app_id = ''
+    app_key = ''
+    try:
+        with open("keys/key_api0", "r") as f:
+            app_id = f.read()
+    except:
+        print("NO ID")
+    
+    try:
+        with open("keys/key_api1", "r") as f:
+            app_key = f.read()
+    except:
+        print("NO KEY")
+    result = requests.get('https://api.edamam.com/search?q={}&app_id={}&app_key={}'.format(ingredient,app_id,app_key))
+    data = result.json()
+    return data['hits']
 
 # sqlite
 DB_FILE_1 = "userinfo.db"
@@ -51,7 +70,16 @@ def index():
 # ACCOUNT INFO CHECK
 @app.route('/home', methods=['GET', 'POST'])
 def authenticate():
-
+    # results = recipe_search("chicken")
+    # for result in results:
+    #         recipe = result['recipe']
+    #         print(round(int(recipe['calories'])))
+    #         print(recipe['label'])
+    #         print(recipe['cuisineType'])
+    #         print(recipe['mealType'])
+    #         print(recipe['url'])
+    #         print("-" * 100)
+    
     if request.method == 'POST':
         username = request.form['username']
         password = request.form['password']
@@ -69,6 +97,8 @@ def authenticate():
         return redirect("/")
     
     return render_template('home.html', status="Successfully logged in!")
+
+
 
 
 # LOGGING IN SYSTEM
@@ -112,9 +142,12 @@ def questions():
     print(request.method)
     return render_template('stroke_question.html')
 
+
 @app.route("/test")
 def test_questions():
     return render_template('test.html')
+
+
 @app.route("/test", methods = ['GET', 'POST'])
 def test():
     sex=None
@@ -190,6 +223,9 @@ def test():
 
 
     stroke_df=stroke_df.sort_values(by=['age'])
+    stroke_df=stroke_df.loc[stroke_df["age"] >= 1]
+    print(stroke_df)
+
     ages=stroke_df['age'].unique()
     age_prob={}
     for x in ages:
@@ -200,7 +236,9 @@ def test():
         else:
             age_prob[x] = round((100*len(stroke_age_yes)/len(stroke_age)),2)
     print(age_prob)
-    return render_template('test.html', overall = overall, all=age_prob)
+    x_vals = list(age_prob.keys())
+    y_vals = list(age_prob.values())
+    return render_template('test.html', overall=overall, all=age_prob, x=x_vals, y=y_vals)
 
 
 @app.route("/strokequestions", methods = ['GET', 'POST'])
@@ -255,6 +293,7 @@ def results():
     db4 = sqlite3.connect(DB_FILE_STROKE_QUESTION)
     c4 = db4.cursor()
     table_question = c4.execute("SELECT name, height, weight, sex, age, heart, smokes FROM stroke_question WHERE user = (?)", (session['username'],) ).fetchall()
+
     print(table_question)
     # db4.commit()
     # db4.close()
@@ -268,6 +307,39 @@ def results():
     db4.commit()
     db4.close()
     return render_template('results.html', disp=table_stroke, ques=table_question, bmi=bmi)
+
+
+@app.route('/search', methods=['GET', 'POST'])
+def searchFood():
+    if request.method == 'POST':
+        DB_FILE_food = "food.db"
+        db_food = sqlite3.connect(DB_FILE_food, check_same_thread=False)
+        c_food = db_food.cursor()
+
+        command_food = "create table IF NOT EXISTS food(user TEXT, label TEXT, calories INTEGER, mealtype TEXT, cuisinetype TEXT, url TEXT, image TEXT);"
+        c_food.execute(command_food)
+        c_food.execute("DELETE FROM food WHERE user = (?)", (session['username'],))
+
+        searchItem = request.form['search']
+        results = recipe_search(searchItem)
+        for result in results:
+            recipe = result['recipe']
+            label = recipe['label']
+            calories = round(int(recipe['calories']))
+            mealType = recipe['mealType'][0]
+            cuisineType = recipe['cuisineType'][0]
+            url = recipe['url']
+            image = recipe['image']
+            c_food.execute("INSERT INTO food VALUES (?,?,?,?,?,?,?);", (session['username'], label, calories, mealType, cuisineType, url, image))
+        table_food = c_food.execute("SELECT * FROM food;").fetchall()
+        db_food.commit()
+        db_food.close()
+        # print(table_food)
+        print(url)
+
+    return render_template('home.html', food=table_food)
+    # return render_template('home.html', label=label, calories=calories, mealType=mealType, cuisineType=cuisineType, url=url, image=image)
+
 
 
 @app.route("/recommendations")
