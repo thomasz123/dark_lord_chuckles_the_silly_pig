@@ -1,16 +1,15 @@
-# Project Name by Dark Lord Chuckles The Silly Pig
+# Health and Diet Recommendations by Dark Lord Chuckles The Silly Pig
 
 ## Roles
-* Thomas Zhang - Project Manager
-* Lauren Lee - Role
-* Diana Akhmedova - Role
+* Thomas Zhang (PM) - Flask, JS (logging in system, graph visuals, tying all of the parts together)
+* Lauren Lee - Database/SQLite (storing CSV data, calculating stroke and lung cancer values)
+* Diana Akhmedova - API, Bootstrap, HTML/CSS/JS (managing/storing/displaying API data, linking HTML pages, graph visuals)
 
 ## Description of Website/App
-* The purpose of our website is to use provided data about a person's health to create visualizations. The visualizations include various diagrams, graphs and charts that help the user detect their health trend. The website also provides diet and exercise recommendations and plans based on the given data. Users of the website have the ability to create a personalized schedule and calendar using said diet and exercise plans. 
+* The purpose of our website is to use provided data about a person's health to create visualizations. The visualizations include various line graphs that help the user detect their health trend. The user is able to choose which factors affect the values on each line graph, and receieve a percentage of how likely they are to develop a stroke and/or lung cancer. The website also provides diet recommendations using the EDAMAM API.
 
 ## APIs Used
 * [EDAMAM Recipe API](https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_recipies.md)
-* [Google Calendar API](https://github.com/stuy-softdev/notes-and-code/blob/main/api_kb/411_on_googlecalendar.md)
 
 ## Data
 ### Description
@@ -42,6 +41,13 @@ git clone git@github.com:thomasz123/dark_lord_chuckles_the_silly_pig.git
 // ---------------------------- OR -----------------------------------------
 git clone https://github.com/thomasz123/dark_lord_chuckles_the_silly_pig.git
 ```
+
+4. Get the ID and key from the EDAMAM API website
+    * Go to the [EDAMAM API](https://developer.edamam.com/edamam-docs-recipe-api) website and create an account
+    * Go to your Dashboard and click on "Applications"
+    * Under Recipe Search API, press "View"
+    * Paste the Application ID into "key_api0" in the app/keys folder.
+    * Paste the Application Key into "key_api1" in the app/keys folder.
 
 ### How to Run
 1. cd into app directory
