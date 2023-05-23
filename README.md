@@ -46,8 +46,8 @@ git clone https://github.com/thomasz123/dark_lord_chuckles_the_silly_pig.git
     * Go to the [EDAMAM API](https://developer.edamam.com/edamam-docs-recipe-api) website and create an account
     * Go to your Dashboard and click on "Applications"
     * Under Recipe Search API, press "View"
-    * Paste the Application ID into "key_api0" in the app/keys folder.
-    * Paste the Application Key into "key_api1" in the app/keys folder.
+    * Paste the Application ID into "key_api0" in the app/keys folder
+    * Paste the Application Key into "key_api1" in the app/keys folder
 
 ### How to Run
 1. cd into app directory
