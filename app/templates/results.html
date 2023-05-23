@@ -54,6 +54,8 @@
             <center>
                 <!-- Stroke Results -->
                 <div>
+                    <h4>{{status}}</h4>
+                    <br><hr><br>
                     <h1>Stroke Results</h1>
                     <br>
                     <table id="tblcsvdata" border="1" style="border-collapse: collapse;">
@@ -130,6 +132,9 @@
                 <div style="width:900px;height:430px">
                     <canvas id="strokeChart"></canvas>
                 </div>
+
+                <br><br>
+                {{overall}}
     
                 <br><br><br>
     
@@ -137,18 +142,18 @@
                 <h1>Lung Cancer Graph</h1>
                 <br>
                 <form id="form2" action="/results" method="POST">
-                    <label><input type="checkbox" name="settings" value="{{a}}" id="sex2"> Sex</label>
-                    <label><input type="checkbox" name="settings" value="{{b}}" id="airpollution2"> Air Pollution</label>
-                    <label><input type="checkbox" name="settings" value="{{c}}" id="alcoholuse2"> Alcohol Use</label>
-                    <label><input type="checkbox" name="settings" value="{{d}}" id="smoking2"> Smoking</label>
+                    <label><input type="checkbox" name="sex2" value="{{x1}}" id="sex2"> Sex</label>
+                    <label><input type="checkbox" name="airpollution2" value="{{y1}}" id="airpollution2"> Air Pollution</label>
+                    <label><input type="checkbox" name="alcoholuse2" value="True" id="alcoholuse2"> Alcohol Use</label>
+                    <label><input type="checkbox" name="smoking2" value="True" id="smoking2"> Smoking</label>
                     <input id="submit1" type="submit" name="submit" value="Submit">
                 </form>
                 <div style="width:900px;height:430px">
                     <canvas id="lungCancerChart"></canvas>
                 </div> 
     
-                <br>
-                {{overall}}
+                <br><br>
+                {{overall1}}
                 <br>
                 <!-- {{all}} -->
             </center>

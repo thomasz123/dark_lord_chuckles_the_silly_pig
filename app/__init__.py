@@ -224,6 +224,9 @@ def test():
 
     df = pd.DataFrame(data_mod, columns =['user','name','height','weight','sex','age','heart', 'smoking status'])
     df = df[df['user'] == session['username']]
+    if len(df) == 0:
+        return render_template('results.html', status="Please fill out the questionnaire first!")
+
     user = df.iloc[0][0]
     user_name = df.iloc[0][1]
     user_height = df.iloc[0][2]
@@ -235,6 +238,10 @@ def test():
         user_sex = "Male"
     user_age = df.iloc[0][5]
     user_heart = df.iloc[0][6]
+    if user_heart == "no":
+        user_heart = 0
+    else:
+        user_heart = 1
     user_bmi = user_weight/(user_height*user_height)*703
     user_smoke = df.iloc[0][7]
 
@@ -280,6 +287,7 @@ def test():
     x_vals = list(age_prob.keys())
     y_vals = list(age_prob.values())
     
+
     #Lung Chart Values
     sex=None
     pollution=None
@@ -315,6 +323,8 @@ def test():
     df = pd.DataFrame(data_mod, columns =['user','name','height','weight','sex','age','alcohol', 'pollution', 'smokes'])
 
     df = df[df['user'] == session['username']]
+    if len(df) == 0:
+        return render_template('results.html', status="Please fill out the questionnaire first!")
     # print(df)
     user = df.iloc[0][0]
     user_name = df.iloc[0][1]
@@ -337,12 +347,12 @@ def test():
     db3 = sqlite3.connect(DB_FILE_STROKE)
     c3 = db3.cursor()
 
-    table_stroke = c3.execute("SELECT * FROM lung;").fetchall()
+    table_lung = c3.execute("SELECT * FROM lung;").fetchall()
     db3.commit()
     db3.close()
 
 
-    lung_df = pd.DataFrame(table_stroke, columns=['id','age','gender','pollution','alc','smoke','level'])
+    lung_df = pd.DataFrame(table_lung, columns=['id','age','gender','pollution','alc','smoke','level'])
     #print(lung_df)
     for x in range(4):
         if options[x] != None:
@@ -359,28 +369,28 @@ def test():
     lung_df_mid = lung_df.loc[lung_df['level'] == "Medium"]
     lung_df_high = lung_df.loc[lung_df['level'] == "High"]
 
-    risk = len(lung_df_high) + 0.5*len(lung_df_mid)
+    risk = len(lung_df_high) + 0*len(lung_df_mid)
 
-    print("your overall probability of getting a stroke is " + str(round((100*risk/len(lung_df)),2)) + "%")
+    overall1 = ("Your overall probability of getting lung cancer is " + str(round((100*risk/len(lung_df)),2)) + "%")
 
 
 
     lung_df=lung_df.sort_values(by=['age'])
     print(lung_df)
     ages=lung_df['age'].unique()
-    age_prob={}
+    age_prob1={}
     if user_age < 22:
         for x in range(user_age,22):
-            age_prob[x] = 0
+            age_prob1[x] = 0
     for x in ages:
         lung_age = lung_df.loc[lung_df['age'] == x]
         lung_age_high = lung_age.loc[lung_age['level'] == 'High']
         lung_age_mid = lung_age.loc[lung_age['level'] == 'Medium']
-        r = len(lung_age_high) + 0.5*len(lung_age_mid)
-        age_prob[x] = round((100*r/len(lung_age)),2)
-    print(age_prob)
-
-
+        r = len(lung_age_high) + 0*len(lung_age_mid)
+        age_prob1[x] = round((100*r/len(lung_age)),2)
+        
+    x_vals1 = list(age_prob1.keys())
+    y_vals1 = list(age_prob1.values())
 
 
     # COPY TO DISPLAY TABLE
@@ -400,7 +410,35 @@ def test():
 
     db4.commit()
     db4.close()
-    return render_template('results.html', overall=overall, all=age_prob, x=x_vals, y=y_vals, ques=table_question, bmi=bmi)
+
+    # COPIED
+    DB_FILE_LUNG="lung.db"
+    db_LUNG = sqlite3.connect(DB_FILE_LUNG)
+    c_LUNG = db_LUNG.cursor()
+    
+    table_lung = c_LUNG.execute("SELECT * FROM lung;").fetchall()
+    db_LUNG.commit()
+    db_LUNG.close()
+
+    DB_FILE_LUNG_QUESTION="lung_question.db"
+    db_LUNGQ = sqlite3.connect(DB_FILE_LUNG_QUESTION)
+    c_LUNGQ = db_LUNGQ.cursor()
+    table_question_lung = c_LUNGQ.execute("SELECT name, height, weight, sex, age, alcohol, pollution, smokes FROM lung_question WHERE user = (?)", (session['username'],) ).fetchall()
+    print(table_question_lung)
+
+    bmi_lung=None
+
+    if table_question_lung != []:
+        # bmi = weight (lb) / [height (in)]2 x 703
+        weight1 = c_LUNGQ.execute("select weight from lung_question where user = (?)", (session['username'],)).fetchall()[0][0]
+        print(weight1)
+        height1 = c_LUNGQ.execute("select height from lung_question where user = (?)", (session['username'],)).fetchall()[0][0]
+        bmi_lung = weight1 / (height1 * height1) * 703
+        bmi_lung = round(bmi_lung, 2)
+
+    db_LUNGQ.commit()
+    db_LUNGQ.close()
+    return render_template('results.html', overall=overall, overall1=overall1, all=age_prob, all1=age_prob1, x=x_vals, y=y_vals, x1=x_vals1, y1=y_vals1, ques=table_question, ques1=table_question_lung, bmi=bmi)
 
 
 @app.route("/strokeresults", methods = ['GET', 'POST'])
