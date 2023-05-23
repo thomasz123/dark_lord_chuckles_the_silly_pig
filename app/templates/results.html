@@ -136,11 +136,11 @@
                 <!-- Lung Cancer Graph -->
                 <h1>Lung Cancer Graph</h1>
                 <br>
-                <form id="form1" action="/results" method="POST">
-                    <label><input type="checkbox" name="settings" value="sex2"> Sex</label>
-                    <label><input type="checkbox" name="settings" value="airpollution2"> Air Pollution</label>
-                    <label><input type="checkbox" name="settings" value="alcoholuse2"> Alcohol Use</label>
-                    <label><input type="checkbox" name="settings" value="smoking2"> Smoking</label>
+                <form id="form2" action="/results" method="POST">
+                    <label><input type="checkbox" name="settings" value="{{a}}" id="sex2"> Sex</label>
+                    <label><input type="checkbox" name="settings" value="{{b}}" id="airpollution2"> Air Pollution</label>
+                    <label><input type="checkbox" name="settings" value="{{c}}" id="alcoholuse2"> Alcohol Use</label>
+                    <label><input type="checkbox" name="settings" value="{{d}}" id="smoking2"> Smoking</label>
                     <input id="submit1" type="submit" name="submit" value="Submit">
                 </form>
                 <div style="width:900px;height:430px">

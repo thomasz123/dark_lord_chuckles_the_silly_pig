@@ -3,9 +3,10 @@
 //     console.log(Object.keys(keys));
 // }
 
-const ctx = document.getElementById('strokeChart').getContext('2d');
+const ctx1 = document.getElementById('strokeChart').getContext('2d');
+const ctx2 = document.getElementById('lungCancerChart').getContext('2d');
 
-const data = {
+const strokeData = {
     labels: [0, 1, 2, 3, 4, 5],
         datasets: [{
             label: 'Stroke',
@@ -16,7 +17,18 @@ const data = {
         }]
 };
 
-const config = {
+const lungData = {
+    labels: [0, 1, 2, 3, 4, 5],
+        datasets: [{
+            label: 'Lung Cancer',
+            data: [null, null, null, null, null, null],
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.1
+        }]
+};
+
+const strokeConfig = {
     scales: {
         xAxes: [{
             ticks: {
@@ -47,18 +59,48 @@ const config = {
     }
 };
 
-const strokeChart = new Chart(ctx, {
+const lungConfig = {
+    scales: {
+        xAxes: [{
+            ticks: {
+                stepSize: 5,
+                min: 10,
+                max: 90
+            },
+            scaleLabel: {
+                display: true,
+                labelString: 'Age',
+                font: {
+                    size: 24,
+                }
+            },
+        }],
+        yAxes: [{
+            ticks: {
+                stepSize: 5,
+                min: 0,
+                max: 70
+            },
+            scaleLabel: {
+                display: true,
+                labelString: 'Likelihood of Lung Cancer (%)'
+            }
+        }]
+    }
+};
+
+const strokeChart = new Chart(ctx1, {
     type: 'line',
-    data: data,
-    options: config
+    data: strokeData,
+    options: strokeConfig
 });
 
-const submit = document.getElementById("form1");
+const submit1 = document.getElementById("form1");
 const x = document.getElementById("sex1");
 const y = document.getElementById("bmi1");
 console.log(x);
 
-function myFunc() {
+function strokeFunc() {
     console.log("Stroke - Checked");
     console.log(x.value.split(","));
     strokeChart.data.datasets[0].data = y.value.split(",");
@@ -66,8 +108,27 @@ function myFunc() {
     strokeChart.update();
 };
 
-submit.addEventListener('click', myFunc());
+function lungFunc() {
+    console.log("Lung - Checked");
+    console.log(a.value.split(","));
+    lungChart.data.datasets[0].data = y.value.split(",");
+    lungChart.data.labels = a.value.split(",");
+    lungChart.update();
+};
 
+submit1.addEventListener('click', strokeFunc());
+
+const lungChart = new Chart(ctx2, {
+    type: 'line',
+    data: lungData,
+    options: lungConfig
+});
+
+const submit2 = document.getElementById("form2");
+const a = document.getElementById("sex2")
+
+
+submit2.addEventListener('click', lungFunc())
 // var checkboxes = document.querySelectorAll("input[type=checkbox][name=settings]");
 // console.log(checkboxes);
 // let enabledSettings = [];
