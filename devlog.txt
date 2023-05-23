@@ -154,25 +154,31 @@ dianaA - 2023-05-22 03:00
     * Users can search for an ingredient, website will display food in the form of cards.
 ==============================================================
 
-laurenL,thomasZ, dianaA- 2023-05-22 13:00
+laurenL, thomasZ, dianaA- 2023-05-22 13:00
 --------------------------------------------------------------
-* cleaned up repo
-* updated design doc
+* Cleaned up repo.
+* Updated design doc.
+==============================================================
+
+dianaA - 2023-05-22 19:32
+--------------------------------------------------------------
+* Created lung cancer questionare and properly linked it.
 ==============================================================
 
 laurenL - 2023-05-22 21:48
 --------------------------------------------------------------
-* Determined metrics for lung chart
-* fixed questionnaire for lungs
+* Determined metrics for lung chart.
+* Fixed questionnaire for lungs.
 * Based on user input on chart, produce values that can be used in the lung chart.
 ==============================================================
 
 thomasZ - 2023-05-22 22:00
 --------------------------------------------------------------
-* worked on creating chart for lung cancer
+* Worked on creating chart for lung cancer.
 ==============================================================
 
-laurenL,thomasZ, dianaA - 2023-05-22 21:48
+laurenL, thomasZ, dianaA - 2023-05-22 21:48
 --------------------------------------------------------------
-* fixed minor bugs on lung chart and chart submission errors
+* Fixed minor bugs on lung chart and chart submission errors.
+* Updated requirements, design doc, and readme.
 ==============================================================
