@@ -1,16 +1,13 @@
 import pandas as pd 
 import sqlite3
 
-
 #replace file paths with your own
 data = pd.read_csv('data/archive/healthcare-dataset-stroke-data.csv')
 
 #drop irrelevent columns
 data=data.drop(columns=['hypertension','ever_married', 'work_type', 'Residence_type', 'avg_glucose_level'])
 
-
-#plot male and female lines showing correlation between age and 
-
+#plot male and female lines showing correlation between age and __
 
 DB_FILE="heart.db"
 db = sqlite3.connect(DB_FILE)

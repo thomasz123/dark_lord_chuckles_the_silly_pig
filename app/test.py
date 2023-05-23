@@ -2,14 +2,12 @@ import sqlite3
 import flask
 import pandas as pd
 
-
 sex=True
 pollution=True
 smoke=True
 alc=True
 options = [sex,pollution,smoke,alc]
-
-    
+   
 DB_FILE_2 = "lung_question.db"
 db2 = sqlite3.connect(DB_FILE_2, check_same_thread=False)
 c2 = db2.cursor()
@@ -38,7 +36,6 @@ user_age = df.iloc[0][5]
 user_alc = df.iloc[0][6]
 user_pollution = df.iloc[0][7]
 user_smoke = int(df.iloc[0][8])
-
 
 #print(user_smoke)
 # print(df)
@@ -70,8 +67,6 @@ risk = len(lung_df_high) + 0.5*len(lung_df_mid)
 
 print("your overall probability of getting a stroke is " + str(round((100*risk/len(lung_df)),2)) + "%")
 
-
-
 lung_df=lung_df.sort_values(by=['age'])
 print(lung_df)
 ages=lung_df['age'].unique()
@@ -86,9 +81,6 @@ for x in ages:
     r = len(lung_age_high) + 0.5*len(lung_age_mid)
     age_prob[x] = round((100*r/len(lung_age)),2)
 print(age_prob)
-
-
-
 
 # # acquihire.loc[(acquihire["last_funding_on"] <= expiration) & 
 # # (acquihire["total_funding_usd"] < 15000000) & (acquihire['ics_percentile'] >= 0.8) & 

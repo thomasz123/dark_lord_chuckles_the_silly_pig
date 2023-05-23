@@ -225,7 +225,7 @@ def test():
     df = pd.DataFrame(data_mod, columns =['user','name','height','weight','sex','age','heart', 'smoking status'])
     df = df[df['user'] == session['username']]
     if len(df) == 0:
-        return render_template('results.html', status="Please fill out the questionnaire first!")
+        return render_template('results.html', status="Please fill out the questionnaire first!", status1="<br><hr><br>")
 
     user = df.iloc[0][0]
     user_name = df.iloc[0][1]
@@ -287,7 +287,6 @@ def test():
     x_vals = list(age_prob.keys())
     y_vals = list(age_prob.values())
     
-
     #Lung Chart Values
     sex=None
     pollution=None
@@ -321,11 +320,11 @@ def test():
         data_mod.append(list(x))
 
     df = pd.DataFrame(data_mod, columns =['user','name','height','weight','sex','age','alcohol', 'pollution', 'smokes'])
-
     df = df[df['user'] == session['username']]
     if len(df) == 0:
-        return render_template('results.html', status="Please fill out the questionnaire first!")
+        return render_template('results.html', status="Please fill out the questionnaire first!", status1="<br><hr><br>")
     # print(df)
+    
     user = df.iloc[0][0]
     user_name = df.iloc[0][1]
     user_height = df.iloc[0][2]
@@ -340,9 +339,8 @@ def test():
     user_pollution = df.iloc[0][7]
     user_smoke = int(df.iloc[0][8])
 
-
     #print(user_smoke)
-    # print(df)
+    #print(df)
     DB_FILE_STROKE="lung.db"
     db3 = sqlite3.connect(DB_FILE_STROKE)
     c3 = db3.cursor()
@@ -350,7 +348,6 @@ def test():
     table_lung = c3.execute("SELECT * FROM lung;").fetchall()
     db3.commit()
     db3.close()
-
 
     lung_df = pd.DataFrame(table_lung, columns=['id','age','gender','pollution','alc','smoke','level'])
     #print(lung_df)
@@ -370,10 +367,7 @@ def test():
     lung_df_high = lung_df.loc[lung_df['level'] == "High"]
 
     risk = len(lung_df_high) + 0*len(lung_df_mid)
-
     overall1 = ("Your overall probability of getting lung cancer is " + str(round((100*risk/len(lung_df)),2)) + "%")
-
-
 
     lung_df=lung_df.sort_values(by=['age'])
     print(lung_df)
@@ -392,13 +386,11 @@ def test():
     x_vals1 = list(age_prob1.keys())
     y_vals1 = list(age_prob1.values())
 
-
-    # COPY TO DISPLAY TABLE
+    ### COPIED TO DISPLAY TABLE
     DB_FILE_STROKE_QUESTION="stroke_question.db"
     db4 = sqlite3.connect(DB_FILE_STROKE_QUESTION)
     c4 = db4.cursor()
     table_question = c4.execute("SELECT name, height, weight, sex, age, heart, smokes FROM stroke_question WHERE user = (?)", (session['username'],) ).fetchall()
-
     print(table_question)
 
     # bmi = weight (lb) / [height (in)]2 x 703
@@ -411,7 +403,7 @@ def test():
     db4.commit()
     db4.close()
 
-    # COPIED
+    ### COPIED TO DISPLAY TABLE
     DB_FILE_LUNG="lung.db"
     db_LUNG = sqlite3.connect(DB_FILE_LUNG)
     c_LUNG = db_LUNG.cursor()
@@ -473,8 +465,7 @@ def results():
     db4.commit()
     db4.close()
 
-
-    # COPIED
+    ### COPIED TO DISPLAY TABLE
     DB_FILE_LUNG="lung.db"
     db_LUNG = sqlite3.connect(DB_FILE_LUNG)
     c_LUNG = db_LUNG.cursor()
