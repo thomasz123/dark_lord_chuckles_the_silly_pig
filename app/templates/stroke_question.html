@@ -71,8 +71,8 @@
         <br>
         <div>
           <label>4. Sex
-            <input type="radio" name="sex" value="female" required>Female
-            <input type="radio" name="sex" value="male" required>Male 
+            <input type="radio" name="sex" value="female" required> Female
+            <input type="radio" name="sex" value="male" required> Male 
           </label>
         </div>
 
@@ -87,17 +87,17 @@
         <br>
         <div>
           <label>6. Have you ever had a heart disease?
-            <input type="radio" name="heart" value="yes" required>Yes
-            <input type="radio" name="heart" value="no" required>No 
+            <input type="radio" name="heart" value="yes" required> Yes
+            <input type="radio" name="heart" value="no" required> No 
           </label>
         </div>
 
         <br>
         <div>
           <label>7. Have you ever smoked before?
-            <input type="radio" name="smoke" value="smokes" required>Currently Smoke
-            <input type="radio" name="smoke" value="formerly smoked" required>Formerly Smoked
-            <input type="radio" name="smoke" value="never smoked" required>Never Smoked
+            <input type="radio" name="smoke" value="smokes" required> Currently Smoke
+            <input type="radio" name="smoke" value="formerly smoked" required> Formerly Smoked
+            <input type="radio" name="smoke" value="never smoked" required> Never Smoked
           </label>
         </div>
 
@@ -139,8 +139,8 @@
         <br>
         <div>
           <label>4. Sex
-            <input type="radio" name="sex" value="female" required>Female
-            <input type="radio" name="sex" value="male" required>Male 
+            <input type="radio" name="sex" value="female" required> Female
+            <input type="radio" name="sex" value="male" required> Male 
           </label>
         </div>
 
@@ -154,19 +154,26 @@
 
         <br>
         <div>
-          <label>6. How often do you consume alcohol?
+          <label>6. How would you rate your alcohol intake on a scale of 1-8 (1 = nondrinker, 8 = chronic drinker)?
             <input type="range" min="0" max="8" value="4" name="alcohol" oninput="this.nextElementSibling.value = this.value" required>
             <output>4</output>
           </label>
         </div>
-
         <br>
         <div>
-          <label>7. How often do you smoke?
+          <label>7. How would you rate the air pollution of your living environment (1 = no pollution, 8 = severe pollution)?
+            <input type="range" min="0" max="8" value="4" name="pollution" oninput="this.nextElementSibling.value = this.value" required>
+            <output>4</output>
+          </label>
+        </div>
+        <br>
+        <div>
+          <label>7. How would you rate your smoking level from 1-9 (1 = nonsmoker, 8 = chronic smoker)?
             <input type="range" min="0" max="8" value="4" name="smoke" oninput="this.nextElementSibling.value = this.value" required>
             <output>4</output>
           </label>
         </div>
+
 
         <br>
         <div>

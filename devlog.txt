@@ -131,7 +131,7 @@ dianaA - 2023-05-17 15:13
 
 laurenL - 2023-05-21 13:13
 --------------------------------------------------------------
-* Based on user input on chart, produce values that can be used in the chart.
+* Based on user input on chart, produce values that can be used in the stroke chart.
 ==============================================================
 
 dianaA, laurenL, thomasZ - 2023-05-21 23:35
@@ -146,4 +146,11 @@ dianaA - 2023-05-22 03:00
 * Merged test page with results page to include both questionnaire answers and graphs.
 * Added EDAMAM Recipe API functionality to recommendations page.
     * Users can search for an ingredient, website will display food in the form of cards.
+==============================================================
+
+laurenL - 2023-05-22 21:48
+--------------------------------------------------------------
+* Determined metrics for lung chart
+* fixed questionnaire for lungs
+* Based on user input on chart, produce values that can be used in the lung chart.
 ==============================================================

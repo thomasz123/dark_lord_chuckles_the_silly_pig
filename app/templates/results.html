@@ -96,15 +96,16 @@
                                 <th>Sex</th>
                                 <th>Age</th>
                                 <th>Alcohol</th>
+                                <th>Air Pollution</th>
                                 <th>Smoking</th>
-                                <th>BMI</th>
+                               
                             </tr>
                             {% for item in ques1 %} 
                                 <tr> 
                                     {% for x in item %} 
                                         <td>{{ x }}</td> 
                                     {% endfor %}
-                                        <td>{{ bmi1 }}</td>
+                                        
                                 </tr>
                             {% endfor %}
                         </thead>
@@ -119,10 +120,10 @@
                 <br>
     
                 <form id="form1" action="/results" method="POST">
-                    <label><input type="checkbox" name="sex1" value="{{x}}" id="sex1">Sex</label>
-                    <label><input type="checkbox" name="bmi1" value="{{y}}" id="bmi1">BMI</label>
-                    <label><input type="checkbox" name="smokingstatus1" value="True">Smoking Status</label>
-                    <label><input type="checkbox" name="heartdisease1" value="True">Heart Disease</label>
+                    <label><input type="checkbox" name="sex1" value="{{x}}" id="sex1"> Sex </label>
+                    <label><input type="checkbox" name="bmi1" value="{{y}}" id="bmi1"> BMI </label>
+                    <label><input type="checkbox" name="smokingstatus1" value="True"> Smoking Status</label>
+                    <label><input type="checkbox" name="heartdisease1" value="True"> Heart Disease</label>
                     <input id="submit1" type="submit" name="submit" value="Submit">
                 </form>
     
@@ -133,17 +134,18 @@
                 <br><br><br>
     
                 <!-- Lung Cancer Graph -->
-                <!-- <h1>Lung Cancer Graph</h1>
+                <h1>Lung Cancer Graph</h1>
                 <br>
-    
-                <label><input type="checkbox" name="settings" value="sex2">Sex</label>
-                <label><input type="checkbox" name="settings" value="airpollution2">Air Pollution</label>
-                <label><input type="checkbox" name="settings" value="alcoholuse2">Alcohol Use</label>
-                <label><input type="checkbox" name="settings" value="smoking2">Smoking</label>
-    
+                <form id="form1" action="/results" method="POST">
+                    <label><input type="checkbox" name="settings" value="sex2"> Sex</label>
+                    <label><input type="checkbox" name="settings" value="airpollution2"> Air Pollution</label>
+                    <label><input type="checkbox" name="settings" value="alcoholuse2"> Alcohol Use</label>
+                    <label><input type="checkbox" name="settings" value="smoking2"> Smoking</label>
+                    <input id="submit1" type="submit" name="submit" value="Submit">
+                </form>
                 <div style="width:900px;height:430px">
                     <canvas id="lungCancerChart"></canvas>
-                </div> -->
+                </div> 
     
                 <br>
                 {{overall}}

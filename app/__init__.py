@@ -26,7 +26,7 @@ command2 = "create table IF NOT EXISTS stroke_question(user TEXT, name TEXT, hei
 c2.execute(command2)
 db2.commit()
 
-command_lung = "create table IF NOT EXISTS lung_question(user TEXT, name TEXT, height INTEGER, weight INTEGER, sex INTEGER, age INTEGER, alcohol INTEGER, smokes TEXT);"
+command_lung = "create table IF NOT EXISTS lung_question(user TEXT, name TEXT, height INTEGER, weight INTEGER, sex INTEGER, age INTEGER, alcohol INTEGER, pollution INTEGER, smokes TEXT);"
 c_lung.execute(command_lung)
 db_lung.commit()
 
@@ -172,10 +172,11 @@ def lungVals():
     _age = request.form['age']
     _alcohol = request.form['alcohol']
     _smoke = request.form['smoke']
+    _pollution = request.form['pollution']
 
     # replaces values when new answers are submited
     c_lung.execute("DELETE FROM lung_question WHERE user = (?)", (session['username'],))
-    c_lung.execute("INSERT INTO lung_question VALUES (?,?,?,?,?,?,?,?);", (session['username'], _name, _height, _weight, _sex, _age, _alcohol, _smoke))
+    c_lung.execute("INSERT INTO lung_question VALUES (?,?,?,?,?,?,?,?,?);", (session['username'], _name, _height, _weight, _sex, _age, _alcohol, _pollution,_smoke))
     print("test)*****************************")
     print( c_lung.execute("SELECT name, height, weight, sex, age, alcohol, smokes FROM lung_question WHERE user = (?)", (session['username'],) ).fetchall())
     
@@ -279,6 +280,109 @@ def test():
     x_vals = list(age_prob.keys())
     y_vals = list(age_prob.values())
     
+    #Lung Chart Values
+    sex=None
+    pollution=None
+    smoke=None
+    alc=None
+    options = [sex,pollution,smoke,alc]
+
+    if request.method == 'POST':
+        if request.form.get('sex2'):
+            _sex = request.form['sex2']
+            options[0] = _sex
+        if request.form.get('airpollution2'):
+            pollution = request.form['airpollution2']
+            options[1] = pollution
+        if request.form.get('smoking2'):
+            _smokingstatus = request.form['smoking2']
+            options[2] = _smokingstatus
+        if request.form.get('alcoholuse2'):
+            alc = request.form['alcoholuse2']
+            options[3] = alc
+
+    DB_FILE_2 = "lung_question.db"
+    db2 = sqlite3.connect(DB_FILE_2, check_same_thread=False)
+    c2 = db2.cursor()
+    data = c2.execute("SELECT * FROM lung_question").fetchall()
+    db2.commit()
+    db2.close()
+
+    data_mod=[]
+    for x in data:
+        data_mod.append(list(x))
+
+    df = pd.DataFrame(data_mod, columns =['user','name','height','weight','sex','age','alcohol', 'pollution', 'smokes'])
+
+    df = df[df['user'] == session['username']]
+    # print(df)
+    user = df.iloc[0][0]
+    user_name = df.iloc[0][1]
+    user_height = df.iloc[0][2]
+    user_weight = df.iloc[0][3]
+    user_sex = df.iloc[0][4]
+    if user_sex == "female":
+        user_sex = 2
+    else:
+        user_sex = 1
+    user_age = df.iloc[0][5]
+    user_alc = df.iloc[0][6]
+    user_pollution = df.iloc[0][7]
+    user_smoke = int(df.iloc[0][8])
+
+
+    #print(user_smoke)
+    # print(df)
+    DB_FILE_STROKE="lung.db"
+    db3 = sqlite3.connect(DB_FILE_STROKE)
+    c3 = db3.cursor()
+
+    table_stroke = c3.execute("SELECT * FROM lung;").fetchall()
+    db3.commit()
+    db3.close()
+
+
+    lung_df = pd.DataFrame(table_stroke, columns=['id','age','gender','pollution','alc','smoke','level'])
+    #print(lung_df)
+    for x in range(4):
+        if options[x] != None:
+            if x == 0:
+                lung_df = lung_df.loc[lung_df['gender'] == user_sex ]
+            if x == 1:
+                lung_df = lung_df.loc[(lung_df['pollution'] >= user_pollution-2) & (lung_df['pollution'] <= user_pollution+2)]
+            if x == 2:
+                lung_df = lung_df.loc[(lung_df['smoke'] >= user_smoke-2) & (lung_df['smoke'] <= user_smoke+2)]
+            if x == 3:
+                lung_df = lung_df.loc[(lung_df['alc'] >= user_alc-2) & (lung_df['alc'] <= user_alc+2)]
+
+    print(lung_df)
+    lung_df_mid = lung_df.loc[lung_df['level'] == "Medium"]
+    lung_df_high = lung_df.loc[lung_df['level'] == "High"]
+
+    risk = len(lung_df_high) + 0.5*len(lung_df_mid)
+
+    print("your overall probability of getting a stroke is " + str(round((100*risk/len(lung_df)),2)) + "%")
+
+
+
+    lung_df=lung_df.sort_values(by=['age'])
+    print(lung_df)
+    ages=lung_df['age'].unique()
+    age_prob={}
+    if user_age < 22:
+        for x in range(user_age,22):
+            age_prob[x] = 0
+    for x in ages:
+        lung_age = lung_df.loc[lung_df['age'] == x]
+        lung_age_high = lung_age.loc[lung_age['level'] == 'High']
+        lung_age_mid = lung_age.loc[lung_age['level'] == 'Medium']
+        r = len(lung_age_high) + 0.5*len(lung_age_mid)
+        age_prob[x] = round((100*r/len(lung_age)),2)
+    print(age_prob)
+
+
+
+
     # COPY TO DISPLAY TABLE
     DB_FILE_STROKE_QUESTION="stroke_question.db"
     db4 = sqlite3.connect(DB_FILE_STROKE_QUESTION)
@@ -336,9 +440,6 @@ def results():
     DB_FILE_LUNG="lung.db"
     db_LUNG = sqlite3.connect(DB_FILE_LUNG)
     c_LUNG = db_LUNG.cursor()
-    c_LUNG.execute("create table if not exists lung(id INTEGER, gender TEXT, age INTEGER, bmi INTEGER, alcohol INTEGER, smoke INTEGER, lung INTEGER);")
-
-    data.to_sql('lung',db_LUNG,if_exists='replace',index=False)
     
     table_lung = c_LUNG.execute("SELECT * FROM lung;").fetchall()
     db_LUNG.commit()
@@ -347,7 +448,7 @@ def results():
     DB_FILE_LUNG_QUESTION="lung_question.db"
     db_LUNGQ = sqlite3.connect(DB_FILE_LUNG_QUESTION)
     c_LUNGQ = db_LUNGQ.cursor()
-    table_question_lung = c_LUNGQ.execute("SELECT name, height, weight, sex, age, alcohol, smokes FROM lung_question WHERE user = (?)", (session['username'],) ).fetchall()
+    table_question_lung = c_LUNGQ.execute("SELECT name, height, weight, sex, age, alcohol, pollution, smokes FROM lung_question WHERE user = (?)", (session['username'],) ).fetchall()
     print(table_question_lung)
 
     bmi_lung=None
