@@ -18,7 +18,7 @@
 * [Stroke Prediction Dataset](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset)
 
 ### Description
-* The dataset a provides information on patients with lung cancer like their age, smoking status, gender, and air pollution level
+* The dataset a provides information on patients with lung cancer like their age, smoking status, gender, and air pollution level.
 ### Source
 * [Lung Cancer Prediction](https://www.kaggle.com/datasets/thedevastator/cancer-patients-and-air-pollution-a-new-link)
 
