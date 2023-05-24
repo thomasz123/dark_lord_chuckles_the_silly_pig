@@ -177,7 +177,7 @@ thomasZ - 2023-05-22 22:00
 * Worked on creating chart for lung cancer.
 ==============================================================
 
-laurenL, thomasZ, dianaA - 2023-05-22 21:48
+laurenL, thomasZ, dianaA - 2023-05-23 21:48
 --------------------------------------------------------------
 * Fixed minor bugs on lung chart and chart submission errors.
 * Updated requirements, design doc, and readme.
