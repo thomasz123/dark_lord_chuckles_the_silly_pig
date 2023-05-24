@@ -3,7 +3,7 @@
 ## Roles
 * Thomas Zhang (PM) - Flask, JS (logging in system, graph visuals, tying all of the parts together)
 * Lauren Lee - Database/SQLite (storing CSV data, calculating stroke and lung cancer values)
-* Diana Akhmedova - API, SQLite, Bootstrap, HTML/CSS/JS (managing/storing/displaying API data, graph visuals, linking HTML pages)
+* Diana Akhmedova - API, Database/SQLite, Bootstrap, HTML/CSS/JS (managing/storing/displaying API data, graph visuals, linking HTML pages)
 
 ## Description of Website/App
 * The purpose of our website is to use provided data about a person's health to create visualizations. The visualizations include various line graphs that help the user detect their health trend. The user is able to choose which factors affect the values on each line graph, and receieve a percentage of how likely they are to develop a stroke and/or lung cancer. The website also provides diet recommendations using the EDAMAM API.
