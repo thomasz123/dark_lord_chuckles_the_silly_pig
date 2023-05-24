@@ -43,8 +43,8 @@ git clone git@github.com:thomasz123/dark_lord_chuckles_the_silly_pig.git
 git clone https://github.com/thomasz123/dark_lord_chuckles_the_silly_pig.git
 ```
 
-4. Get the ID and Key from the EDAMAM API website<br>
-   (a) Go to the [EDAMAM API](https://developer.edamam.com/edamam-docs-recipe-api) website and create an account<br>
+4. Get the ID and Key from the EDAMAM Recipe API website<br>
+   (a) Go to the [EDAMAM Recipe API](https://developer.edamam.com/edamam-docs-recipe-api) website and create an account<br>
    (b) Go to your Dashboard and click on "Applications"<br>
    (c) Under Recipe Search API, press "View"<br>
    (d) Paste the Application ID into "key_api0" in the app/keys folder<br>
