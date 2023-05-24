@@ -181,4 +181,5 @@ laurenL, thomasZ, dianaA - 2023-05-23 21:48
 --------------------------------------------------------------
 * Fixed minor bugs on lung chart and chart submission errors.
 * Updated requirements, design doc, and readme.
+    * Design doc revisions include removing exercise recommendations and calendar.
 ==============================================================
