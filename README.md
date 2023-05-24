@@ -13,14 +13,14 @@
 
 ## Data
 ### Description
-* The dataset calculates the possibility of one having a heart attack using 14 attributes. This includes, age, sex, chest pain type, resting blood pressure, serum cholesterol, fasting blood sugar, maximum heart rate achieved, and number of major vessels. In the dataset, the "target" field refers to the presence of heart disease in the patient, with 0 referrring to no or a lower chance of heart attack and 1 referring to a higher chance of heart attack.
+* This dataset is used to predict a patient's likelyhood to get a stroke based on factors like gender, age, BMI, and smoking status. 
 ### Source
-* [Health care: Heart attack possibility](https://www.kaggle.com/datasets/nareshbhat/health-care-data-set-on-heart-attack-possibility)
+* [Stroke Prediction Dataset](https://www.kaggle.com/datasets/fedesoriano/stroke-prediction-dataset)
 
 ### Description
-* The dataset analyzes and evaluates workouts that one can do at the gym or at home to stay healthy. The exercises range from bodyweight to machine-based or dumbbell/barbell based. The dataset is useful in evaluating which exercise targets a specific muscle group the best and also provies visualizations of the exercise details. The csv file has more than 2500 rows of exercises.
+* The dataset a provides information on patients with lung cancer like their age, smoking status, gender, and air pollution level
 ### Source
-* [Gym Exercise Dataset](https://www.kaggle.com/datasets/niharika41298/gym-exercise-data)
+* [Lung Cancer Prediction](https://www.kaggle.com/datasets/thedevastator/cancer-patients-and-air-pollution-a-new-link)
 
 ## Launch Codes
 ### How to Clone/Install
