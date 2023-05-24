@@ -1,0 +1,8 @@
+The EDAMAM Recipe API provides recipes and nutrition information, such as ingredients list, a recipe image, and a URL to the recipe page.
+
+To get the ID and Key from the EDAMAM Recipe API website and use it in this project, follow these steps:
+1) Go to the EDAMAM Recipe API website (https://developer.edamam.com/edamam-docs-recipe-api) and create an account.
+2) Go to your Dashboard and click on "Applications."
+3) Under Recipe Search API, press "View."
+4) Paste the Application ID into "key_api0" in the app/keys folder.
+5) Paste the Application Key into "key_api1" in the app/keys folder.
