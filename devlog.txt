@@ -37,6 +37,7 @@ tables.
 - Users table should probably have more tables to track the
 users info, not just username and password. 
 - Expand on questions being asked. Give specific examples.
+==============================================================
 
 thomasZ, dianaA -- 2023-05-03 23:00
 --------------------------------------------------------------
@@ -133,7 +134,6 @@ dianaA - 2023-05-20 21:00
 --------------------------------------------------------------
 * made chart checkboxes part of html form
 ==============================================================
-
 
 laurenL - 2023-05-21 13:13
 --------------------------------------------------------------
